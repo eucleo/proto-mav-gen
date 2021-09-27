@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+package mav;
+
+import "google/protobuf/descriptor.proto";
+
+message MavFieldOptions {
+  optional string type = 1;
+  optional string enum = 2;
+  optional string display = 3;
+}
+
+message MavMesOptions {
+  optional int32 id = 1;
+}
+
+extend google.protobuf.FieldOptions {
+  optional MavFieldOptions opts = 60066;
+}
+extend google.protobuf.MessageOptions {
+  optional MavMesOptions message = 60066;
+}

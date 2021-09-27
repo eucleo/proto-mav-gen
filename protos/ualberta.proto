@@ -1,0 +1,89 @@
+syntax = "proto3";
+
+package ualberta;
+
+import "mav.proto";
+
+import "common.proto";
+
+enum UALBERTA_AUTOPILOT_MODE {
+// Available autopilot modes for ualberta uav
+  // Raw input pulse widts sent to output
+  MODE_MANUAL_DIRECT = 0;
+  // Inputs are normalized using calibration, the converted back to raw pulse widths for output
+  MODE_MANUAL_SCALED = 1;
+  //  dfsdfs
+  MODE_AUTO_PID_ATT = 2;
+  //  dfsfds
+  MODE_AUTO_PID_VEL = 3;
+  //  dfsdfsdfs
+  MODE_AUTO_PID_POS = 4;
+}
+
+enum UALBERTA_NAV_MODE {
+// Navigation filter mode
+  NAV_AHRS_INIT = 0;
+  // AHRS mode
+  NAV_AHRS = 1;
+  // INS/GPS initialization mode
+  NAV_INS_GPS_INIT = 2;
+  // INS/GPS mode
+  NAV_INS_GPS = 3;
+}
+
+enum UALBERTA_PILOT_MODE {
+// Mode currently commanded by pilot
+  //  sdf
+  PILOT_MANUAL = 0;
+  //  dfs
+  PILOT_AUTO = 1;
+  //  Rotomotion mode 
+  PILOT_ROTO = 2;
+}
+
+// Accelerometer and Gyro biases from the navigation filter
+message NAV_FILTER_BIAS {  // MavLink id: 220
+  option (mav.message).id = 220;
+  // Timestamp (microseconds)
+  uint64 usec = 1 [(mav.opts) = { type: "uint64_t" }];
+  // b_f[0]
+  float accel_0 = 2 [(mav.opts) = { type: "float" }];
+  // b_f[1]
+  float accel_1 = 3 [(mav.opts) = { type: "float" }];
+  // b_f[2]
+  float accel_2 = 4 [(mav.opts) = { type: "float" }];
+  // b_f[0]
+  float gyro_0 = 5 [(mav.opts) = { type: "float" }];
+  // b_f[1]
+  float gyro_1 = 6 [(mav.opts) = { type: "float" }];
+  // b_f[2]
+  float gyro_2 = 7 [(mav.opts) = { type: "float" }];
+}
+
+// Complete set of calibration parameters for the radio
+message RADIO_CALIBRATION {  // MavLink id: 221
+  option (mav.message).id = 221;
+  // Aileron setpoints: left, center, right
+  repeated uint32 aileron = 1 [(mav.opts) = { type: "uint16_t[3]" }];
+  // Elevator setpoints: nose down, center, nose up
+  repeated uint32 elevator = 2 [(mav.opts) = { type: "uint16_t[3]" }];
+  // Rudder setpoints: nose left, center, nose right
+  repeated uint32 rudder = 3 [(mav.opts) = { type: "uint16_t[3]" }];
+  // Tail gyro mode/gain setpoints: heading hold, rate mode
+  repeated uint32 gyro = 4 [(mav.opts) = { type: "uint16_t[2]" }];
+  // Pitch curve setpoints (every 25%)
+  repeated uint32 pitch = 5 [(mav.opts) = { type: "uint16_t[5]" }];
+  // Throttle curve setpoints (every 25%)
+  repeated uint32 throttle = 6 [(mav.opts) = { type: "uint16_t[5]" }];
+}
+
+// System status specific to ualberta uav
+message UALBERTA_SYS_STATUS {  // MavLink id: 222
+  option (mav.message).id = 222;
+  // System mode, see UALBERTA_AUTOPILOT_MODE ENUM
+  uint32 mode = 1 [(mav.opts) = { type: "uint8_t" }];
+  // Navigation mode, see UALBERTA_NAV_MODE ENUM
+  uint32 nav_mode = 2 [(mav.opts) = { type: "uint8_t" }];
+  // Pilot mode, see UALBERTA_PILOT_MODE
+  uint32 pilot = 3 [(mav.opts) = { type: "uint8_t" }];
+}

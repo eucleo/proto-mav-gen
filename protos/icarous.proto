@@ -1,0 +1,65 @@
+syntax = "proto3";
+
+package icarous;
+
+import "mav.proto";
+
+
+enum ICAROUS_TRACK_BAND_TYPES {
+  ICAROUS_TRACK_BAND_TYPE_NONE = 0;
+  ICAROUS_TRACK_BAND_TYPE_NEAR = 1;
+  ICAROUS_TRACK_BAND_TYPE_RECOVERY = 2;
+}
+
+enum ICAROUS_FMS_STATE {
+  ICAROUS_FMS_STATE_IDLE = 0;
+  ICAROUS_FMS_STATE_TAKEOFF = 1;
+  ICAROUS_FMS_STATE_CLIMB = 2;
+  ICAROUS_FMS_STATE_CRUISE = 3;
+  ICAROUS_FMS_STATE_APPROACH = 4;
+  ICAROUS_FMS_STATE_LAND = 5;
+}
+
+// ICAROUS heartbeat
+message ICAROUS_HEARTBEAT {  // MavLink id: 42000
+  option (mav.message).id = 42000;
+  // See the FMS_STATE enum.
+  ICAROUS_FMS_STATE status = 1 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_FMS_STATE" }];
+}
+
+// Kinematic multi bands (track) output from Daidalus
+message ICAROUS_KINEMATIC_BANDS {  // MavLink id: 42001
+  option (mav.message).id = 42001;
+  // min angle (degrees)
+  float min1 = 1 [(mav.opts) = { type: "float" }];
+  // max angle (degrees)
+  float max1 = 2 [(mav.opts) = { type: "float" }];
+  // min angle (degrees)
+  float min2 = 3 [(mav.opts) = { type: "float" }];
+  // max angle (degrees)
+  float max2 = 4 [(mav.opts) = { type: "float" }];
+  // min angle (degrees)
+  float min3 = 5 [(mav.opts) = { type: "float" }];
+  // max angle (degrees)
+  float max3 = 6 [(mav.opts) = { type: "float" }];
+  // min angle (degrees)
+  float min4 = 7 [(mav.opts) = { type: "float" }];
+  // max angle (degrees)
+  float max4 = 8 [(mav.opts) = { type: "float" }];
+  // min angle (degrees)
+  float min5 = 9 [(mav.opts) = { type: "float" }];
+  // max angle (degrees)
+  float max5 = 10 [(mav.opts) = { type: "float" }];
+  // Number of track bands
+  int32 numBands = 11 [(mav.opts) = { type: "int8_t" }];
+  // See the TRACK_BAND_TYPES enum.
+  ICAROUS_TRACK_BAND_TYPES type1 = 12 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_TRACK_BAND_TYPES" }];
+  // See the TRACK_BAND_TYPES enum.
+  ICAROUS_TRACK_BAND_TYPES type2 = 13 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_TRACK_BAND_TYPES" }];
+  // See the TRACK_BAND_TYPES enum.
+  ICAROUS_TRACK_BAND_TYPES type3 = 14 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_TRACK_BAND_TYPES" }];
+  // See the TRACK_BAND_TYPES enum.
+  ICAROUS_TRACK_BAND_TYPES type4 = 15 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_TRACK_BAND_TYPES" }];
+  // See the TRACK_BAND_TYPES enum.
+  ICAROUS_TRACK_BAND_TYPES type5 = 16 [(mav.opts) = { type: "uint8_t", enum: "ICAROUS_TRACK_BAND_TYPES" }];
+}

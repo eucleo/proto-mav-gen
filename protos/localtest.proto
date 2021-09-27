@@ -1,0 +1,124 @@
+syntax = "proto3";
+
+package localtest;
+
+import "mav.proto";
+
+import "common.proto";
+
+enum MAV_NO_VALS {
+  // uno!
+  MAV_TYPE_ONE_0 = 0;
+  // duo!
+  MAV_TYPE_TWO_1 = 1;
+  // tres!
+  MAV_TYPE_THREE_2 = 2;
+}
+
+enum MAV_NO_VAL_100 {
+  // Not used in MavLink, make protobuf happy.
+  MAV_NO_VAL_100_UNDEFINED = 0;
+  // sparta!
+  MAV_TYPE_HUNDRED = 100;
+  // uno!
+  MAV_TYPE_ONE_101 = 101;
+  // tres!
+  MAV_TYPE_THREE_102 = 102;
+}
+
+enum MAV_TYPE {
+  // Generic micro air vehicle
+  MAV_TYPE_GENERIC = 0;
+  // Fixed wing aircraft.
+  MAV_TYPE_FIXED_WING = 1;
+  // Quadrotor
+  MAV_TYPE_QUADROTOR = 2;
+  // Coaxial helicopter
+  MAV_TYPE_COAXIAL = 3;
+  // Normal helicopter with tail rotor.
+  MAV_TYPE_HELICOPTER = 4;
+  // Ground installation
+  MAV_TYPE_ANTENNA_TRACKER = 5;
+  // Operator control unit / ground control station
+  MAV_TYPE_GCS = 6;
+  // Airship, controlled
+  MAV_TYPE_AIRSHIP = 7;
+  // Free balloon, uncontrolled
+  MAV_TYPE_FREE_BALLOON = 8;
+  // Rocket
+  MAV_TYPE_ROCKET = 9;
+  // Ground rover
+  MAV_TYPE_GROUND_ROVER = 10;
+  // Surface vessel, boat, ship
+  MAV_TYPE_SURFACE_BOAT = 11;
+  // Submarine
+  MAV_TYPE_SUBMARINE = 12;
+  // Hexarotor
+  MAV_TYPE_HEXAROTOR = 13;
+  // Octorotor
+  MAV_TYPE_OCTOROTOR = 14;
+  // Tricopter
+  MAV_TYPE_TRICOPTER = 15;
+  // Flapping wing
+  MAV_TYPE_FLAPPING_WING = 16;
+  // Kite
+  MAV_TYPE_KITE = 17;
+  // Onboard companion controller
+  MAV_TYPE_ONBOARD_CONTROLLER = 18;
+  // Two-rotor VTOL using control surfaces in vertical operation in addition. Tailsitter.
+  MAV_TYPE_VTOL_DUOROTOR = 19;
+  // Quad-rotor VTOL using a V-shaped quad config in vertical operation. Tailsitter.
+  MAV_TYPE_VTOL_QUADROTOR = 20;
+  // Tiltrotor VTOL
+  MAV_TYPE_VTOL_TILTROTOR = 21;
+  // VTOL reserved 2
+  MAV_TYPE_VTOL_RESERVED2 = 22;
+  // VTOL reserved 3
+  MAV_TYPE_VTOL_RESERVED3 = 23;
+  // VTOL reserved 4
+  MAV_TYPE_VTOL_RESERVED4 = 24;
+  // VTOL reserved 5
+  MAV_TYPE_VTOL_RESERVED5 = 25;
+  // Gimbal
+  MAV_TYPE_GIMBAL = 26;
+  // ADSB system
+  MAV_TYPE_ADSB = 27;
+  // Steerable, nonrigid airfoil
+  MAV_TYPE_PARAFOIL = 28;
+  // Dodecarotor
+  MAV_TYPE_DODECAROTOR = 29;
+  // Camera
+  MAV_TYPE_CAMERA = 30;
+  // Charging station
+  MAV_TYPE_CHARGING_STATION = 31;
+  // FLARM collision avoidance system
+  MAV_TYPE_FLARM = 32;
+  // Servo
+  MAV_TYPE_SERVO = 33;
+  // Open Drone ID. See https://mavlink.io/en/services/opendroneid.html.
+  MAV_TYPE_ODID = 34;
+  // aliens!
+  MAV_TYPE_UFO = 100;
+}
+
+// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at https://mavlink.io/en/services/heartbeat.html
+message HEARTBEAT2 {  // MavLink id: 55000
+  option (mav.message).id = 55000;
+  // A bitfield for use for autopilot-specific flags
+  repeated uint32 custom_mode = 1 [(mav.opts) = { type: "uint32_t[256]" }];
+  // Vehicle or component type. For a flight controller component the vehicle type (quadrotor, helicopter, etc.). For other components the component type (e.g. camera, gimbal, etc.). This should be used in preference to component id for identifying the component type.
+  MAV_TYPE type = 2 [(mav.opts) = { type: "uint8_t", enum: "MAV_TYPE" }];
+  // Autopilot type / class. Use MAV_AUTOPILOT_INVALID for components that are not flight controllers.
+  common.MAV_AUTOPILOT autopilot = 3 [(mav.opts) = { type: "uint8_t", enum: "common.MAV_AUTOPILOT" }];
+  // System mode bitmap.
+  // bitfield defined by enum common.MAV_MODE_FLAG
+  uint32 base_mode = 4 [(mav.opts) = { type: "uint8_t", enum: "common.MAV_MODE_FLAG" }];
+  // A bitfield for use for autopilot-specific flags
+  string string_test = 5 [(mav.opts) = { type: "char[256]" }];
+  // Some bytes (256)!
+  repeated uint32 bytes_test = 6 [(mav.opts) = { type: "uint8_t[256]" }];
+  // System status flag.
+  common.MAV_STATE system_status = 7 [(mav.opts) = { type: "uint8_t", enum: "common.MAV_STATE" }];
+  // MAVLink version, not writable by user, gets added by protocol because of magic data type: uint8_t_mavlink_version
+  uint32 mavlink_version = 8 [(mav.opts) = { type: "uint8_t" }];
+}

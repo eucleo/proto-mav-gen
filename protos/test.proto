@@ -1,0 +1,55 @@
+syntax = "proto3";
+
+package test;
+
+import "mav.proto";
+
+
+// Test all field types
+message TEST_TYPES {  // MavLink id: 0
+  option (mav.message).id = 0;
+  // uint64_t
+  uint64 u64 = 1 [(mav.opts) = { type: "uint64_t" }];
+  // int64_t
+  int64 s64 = 2 [(mav.opts) = { type: "int64_t" }];
+  // double
+  double d = 3 [(mav.opts) = { type: "double" }];
+  // uint64_t_array
+  repeated uint64 u64_array = 4 [(mav.opts) = { type: "uint64_t[3]" }];
+  // int64_t_array
+  repeated int64 s64_array = 5 [(mav.opts) = { type: "int64_t[3]" }];
+  // double_array
+  repeated double d_array = 6 [(mav.opts) = { type: "double[3]" }];
+  // uint32_t
+  uint32 u32 = 7 [(mav.opts) = { type: "uint32_t" }];
+  // int32_t
+  int32 s32 = 8 [(mav.opts) = { type: "int32_t" }];
+  // float
+  float f = 9 [(mav.opts) = { type: "float" }];
+  // uint32_t_array
+  repeated uint32 u32_array = 10 [(mav.opts) = { type: "uint32_t[3]" }];
+  // int32_t_array
+  repeated int32 s32_array = 11 [(mav.opts) = { type: "int32_t[3]" }];
+  // float_array
+  repeated float f_array = 12 [(mav.opts) = { type: "float[3]" }];
+  // uint16_t
+  uint32 u16 = 13 [(mav.opts) = { type: "uint16_t" }];
+  // int16_t
+  int32 s16 = 14 [(mav.opts) = { type: "int16_t" }];
+  // uint16_t_array
+  repeated uint32 u16_array = 15 [(mav.opts) = { type: "uint16_t[3]" }];
+  // int16_t_array
+  repeated int32 s16_array = 16 [(mav.opts) = { type: "int16_t[3]" }];
+  // char
+  uint32 c = 17 [(mav.opts) = { type: "char" }];
+  // string
+  string s = 18 [(mav.opts) = { type: "char[10]" }];
+  // uint8_t
+  uint32 u8 = 19 [(mav.opts) = { type: "uint8_t" }];
+  // int8_t
+  int32 s8 = 20 [(mav.opts) = { type: "int8_t" }];
+  // uint8_t_array
+  repeated uint32 u8_array = 21 [(mav.opts) = { type: "uint8_t[3]" }];
+  // int8_t_array
+  repeated int32 s8_array = 22 [(mav.opts) = { type: "int8_t[3]" }];
+}

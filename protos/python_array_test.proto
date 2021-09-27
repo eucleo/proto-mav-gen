@@ -1,0 +1,119 @@
+syntax = "proto3";
+
+package python_array_test;
+
+import "mav.proto";
+
+import "common.proto";
+
+// Array test #0.
+message ARRAY_TEST_0 {  // MavLink id: 150
+  option (mav.message).id = 150;
+  // Value array
+  repeated uint32 ar_u32 = 1 [(mav.opts) = { type: "uint32_t[4]" }];
+  // Value array
+  repeated uint32 ar_u16 = 2 [(mav.opts) = { type: "uint16_t[4]" }];
+  // Stub field
+  uint32 v1 = 3 [(mav.opts) = { type: "uint8_t" }];
+  // Value array
+  repeated int32 ar_i8 = 4 [(mav.opts) = { type: "int8_t[4]" }];
+  // Value array
+  repeated uint32 ar_u8 = 5 [(mav.opts) = { type: "uint8_t[4]" }];
+}
+
+// Array test #1.
+message ARRAY_TEST_1 {  // MavLink id: 151
+  option (mav.message).id = 151;
+  // Value array
+  repeated uint32 ar_u32 = 1 [(mav.opts) = { type: "uint32_t[4]" }];
+}
+
+// Array test #3.
+message ARRAY_TEST_3 {  // MavLink id: 153
+  option (mav.message).id = 153;
+  // Value array
+  repeated uint32 ar_u32 = 1 [(mav.opts) = { type: "uint32_t[4]" }];
+  // Stub field
+  uint32 v = 2 [(mav.opts) = { type: "uint8_t" }];
+}
+
+// Array test #4.
+message ARRAY_TEST_4 {  // MavLink id: 154
+  option (mav.message).id = 154;
+  // Value array
+  repeated uint32 ar_u32 = 1 [(mav.opts) = { type: "uint32_t[4]" }];
+  // Stub field
+  uint32 v = 2 [(mav.opts) = { type: "uint8_t" }];
+}
+
+// Array test #5.
+message ARRAY_TEST_5 {  // MavLink id: 155
+  option (mav.message).id = 155;
+  // Value array
+  string c1 = 1 [(mav.opts) = { type: "char[5]" }];
+  // Value array
+  string c2 = 2 [(mav.opts) = { type: "char[5]" }];
+}
+
+// Array test #6.
+message ARRAY_TEST_6 {  // MavLink id: 156
+  option (mav.message).id = 156;
+  // Value array
+  repeated double ar_d = 1 [(mav.opts) = { type: "double[2]" }];
+  // Stub field
+  uint32 v3 = 2 [(mav.opts) = { type: "uint32_t" }];
+  // Value array
+  repeated uint32 ar_u32 = 3 [(mav.opts) = { type: "uint32_t[2]" }];
+  // Value array
+  repeated int32 ar_i32 = 4 [(mav.opts) = { type: "int32_t[2]" }];
+  // Value array
+  repeated float ar_f = 5 [(mav.opts) = { type: "float[2]" }];
+  // Stub field
+  uint32 v2 = 6 [(mav.opts) = { type: "uint16_t" }];
+  // Value array
+  repeated uint32 ar_u16 = 7 [(mav.opts) = { type: "uint16_t[2]" }];
+  // Value array
+  repeated int32 ar_i16 = 8 [(mav.opts) = { type: "int16_t[2]" }];
+  // Stub field
+  uint32 v1 = 9 [(mav.opts) = { type: "uint8_t" }];
+  // Value array
+  repeated uint32 ar_u8 = 10 [(mav.opts) = { type: "uint8_t[2]" }];
+  // Value array
+  repeated int32 ar_i8 = 11 [(mav.opts) = { type: "int8_t[2]" }];
+  // Value array
+  string ar_c = 12 [(mav.opts) = { type: "char[32]" }];
+}
+
+// Array test #7.
+message ARRAY_TEST_7 {  // MavLink id: 157
+  option (mav.message).id = 157;
+  // Value array
+  repeated double ar_d = 1 [(mav.opts) = { type: "double[2]" }];
+  // Value array
+  repeated float ar_f = 2 [(mav.opts) = { type: "float[2]" }];
+  // Value array
+  repeated uint32 ar_u32 = 3 [(mav.opts) = { type: "uint32_t[2]" }];
+  // Value array
+  repeated int32 ar_i32 = 4 [(mav.opts) = { type: "int32_t[2]" }];
+  // Value array
+  repeated uint32 ar_u16 = 5 [(mav.opts) = { type: "uint16_t[2]" }];
+  // Value array
+  repeated int32 ar_i16 = 6 [(mav.opts) = { type: "int16_t[2]" }];
+  // Value array
+  repeated uint32 ar_u8 = 7 [(mav.opts) = { type: "uint8_t[2]" }];
+  // Value array
+  repeated int32 ar_i8 = 8 [(mav.opts) = { type: "int8_t[2]" }];
+  // Value array
+  string ar_c = 9 [(mav.opts) = { type: "char[32]" }];
+}
+
+// Array test #8.
+message ARRAY_TEST_8 {  // MavLink id: 158
+  option (mav.message).id = 158;
+  // Value array
+  repeated double ar_d = 1 [(mav.opts) = { type: "double[2]" }];
+  // Stub field
+  uint32 v3 = 2 [(mav.opts) = { type: "uint32_t" }];
+  // Value array
+  repeated uint32 ar_u16 = 3 [(mav.opts) = { type: "uint16_t[2]" }];
+}

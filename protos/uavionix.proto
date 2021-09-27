@@ -1,0 +1,176 @@
+syntax = "proto3";
+
+package uavionix;
+
+import "mav.proto";
+
+import "common.proto";
+
+enum UAVIONIX_ADSB_OUT_DYNAMIC_STATE {
+// State flags for ADS-B transponder dynamic report
+// This enum is used to define bitmasks (work around protobuf limitations).
+  // Not used in MavLink, make protobuf happy.
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_UNDEFINED = 0;
+  // bit 1
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_INTENT_CHANGE = 0x00000001;
+  // bit 2
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_AUTOPILOT_ENABLED = 0x00000002;
+  // bit 3
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_NICBARO_CROSSCHECKED = 0x00000004;
+  // bit 4
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_ON_GROUND = 0x00000008;
+  // bit 5
+  UAVIONIX_ADSB_OUT_DYNAMIC_STATE_IDENT = 0x00000010;
+}
+
+enum UAVIONIX_ADSB_OUT_RF_SELECT {
+// Transceiver RF control flags for ADS-B transponder dynamic reports
+// This enum is used to define bitmasks (work around protobuf limitations).
+  // bit 0
+  UAVIONIX_ADSB_OUT_RF_SELECT_STANDBY = 0x00000000;
+  // bit 1
+  UAVIONIX_ADSB_OUT_RF_SELECT_RX_ENABLED = 0x00000001;
+  // bit 2
+  UAVIONIX_ADSB_OUT_RF_SELECT_TX_ENABLED = 0x00000002;
+}
+
+enum UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX {
+// Status for ADS-B transponder dynamic input
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_NONE_0 = 0;
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_NONE_1 = 1;
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_2D = 2;
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_3D = 3;
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_DGPS = 4;
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX_RTK = 5;
+}
+
+enum UAVIONIX_ADSB_RF_HEALTH {
+// Status flags for ADS-B transponder dynamic output
+// This enum is used to define bitmasks (work around protobuf limitations).
+  // bit 0
+  UAVIONIX_ADSB_RF_HEALTH_INITIALIZING = 0x00000000;
+  // bit 1
+  UAVIONIX_ADSB_RF_HEALTH_OK = 0x00000001;
+  // bit 2
+  UAVIONIX_ADSB_RF_HEALTH_FAIL_TX = 0x00000002;
+  // bit 5
+  UAVIONIX_ADSB_RF_HEALTH_FAIL_RX = 0x00000010;
+}
+
+enum UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE {
+// Definitions for aircraft size
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_NO_DATA = 0;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L15M_W23M = 1;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L25M_W28P5M = 2;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L25_34M = 3;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L35_33M = 4;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L35_38M = 5;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L45_39P5M = 6;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L45_45M = 7;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L55_45M = 8;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L55_52M = 9;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L65_59P5M = 10;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L65_67M = 11;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L75_W72P5M = 12;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L75_W80M = 13;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L85_W80M = 14;
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE_L85_W90M = 15;
+}
+
+enum UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT {
+// GPS lataral offset encoding
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_NO_DATA = 0;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_LEFT_2M = 1;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_LEFT_4M = 2;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_LEFT_6M = 3;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_RIGHT_0M = 4;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_RIGHT_2M = 5;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_RIGHT_4M = 6;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT_RIGHT_6M = 7;
+}
+
+enum UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LON {
+// GPS longitudinal offset encoding
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LON_NO_DATA = 0;
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LON_APPLIED_BY_SENSOR = 1;
+}
+
+enum UAVIONIX_ADSB_EMERGENCY_STATUS {
+// Emergency status encoding
+  UAVIONIX_ADSB_OUT_NO_EMERGENCY = 0;
+  UAVIONIX_ADSB_OUT_GENERAL_EMERGENCY = 1;
+  UAVIONIX_ADSB_OUT_LIFEGUARD_EMERGENCY = 2;
+  UAVIONIX_ADSB_OUT_MINIMUM_FUEL_EMERGENCY = 3;
+  UAVIONIX_ADSB_OUT_NO_COMM_EMERGENCY = 4;
+  UAVIONIX_ADSB_OUT_UNLAWFUL_INTERFERANCE_EMERGENCY = 5;
+  UAVIONIX_ADSB_OUT_DOWNED_AIRCRAFT_EMERGENCY = 6;
+  UAVIONIX_ADSB_OUT_RESERVED = 7;
+}
+
+// Static data to configure the ADS-B transponder (send within 10 sec of a POR and every 10 sec thereafter)
+message UAVIONIX_ADSB_OUT_CFG {  // MavLink id: 10001
+  option (mav.message).id = 10001;
+  // Vehicle address (24 bit)
+  uint32 ICAO = 1 [(mav.opts) = { type: "uint32_t" }];
+  // Aircraft stall speed in cm/s
+  uint32 stallSpeed = 2 [(mav.opts) = { type: "uint16_t" }];
+  // Vehicle identifier (8 characters, null terminated, valid characters are A-Z, 0-9, " " only)
+  string callsign = 3 [(mav.opts) = { type: "char[9]" }];
+  // Transmitting vehicle type. See ADSB_EMITTER_TYPE enum
+  common.ADSB_EMITTER_TYPE emitterType = 4 [(mav.opts) = { type: "uint8_t", enum: "common.ADSB_EMITTER_TYPE" }];
+  // Aircraft length and width encoding (table 2-35 of DO-282B)
+  UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE aircraftSize = 5 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_OUT_CFG_AIRCRAFT_SIZE" }];
+  // GPS antenna lateral offset (table 2-36 of DO-282B)
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT gpsOffsetLat = 6 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LAT" }];
+  // GPS antenna longitudinal offset from nose [if non-zero, take position (in meters) divide by 2 and add one] (table 2-37 DO-282B)
+  UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LON gpsOffsetLon = 7 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_OUT_CFG_GPS_OFFSET_LON" }];
+  // ADS-B transponder reciever and transmit enable flags
+  // bitfield defined by enum UAVIONIX_ADSB_OUT_RF_SELECT
+  uint32 rfSelect = 8 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_OUT_RF_SELECT" }];
+}
+
+// Dynamic data used to generate ADS-B out transponder data (send at 5Hz)
+message UAVIONIX_ADSB_OUT_DYNAMIC {  // MavLink id: 10002
+  option (mav.message).id = 10002;
+  // UTC time in seconds since GPS epoch (Jan 6, 1980). If unknown set to UINT32_MAX
+  uint32 utcTime = 1 [(mav.opts) = { type: "uint32_t" }];
+  // Latitude WGS84 (deg * 1E7). If unknown set to INT32_MAX
+  int32 gpsLat = 2 [(mav.opts) = { type: "int32_t" }];
+  // Longitude WGS84 (deg * 1E7). If unknown set to INT32_MAX
+  int32 gpsLon = 3 [(mav.opts) = { type: "int32_t" }];
+  // Altitude (WGS84). UP +ve. If unknown set to INT32_MAX
+  int32 gpsAlt = 4 [(mav.opts) = { type: "int32_t" }];
+  // Barometric pressure altitude (MSL) relative to a standard atmosphere of 1013.2 mBar and NOT bar corrected altitude (m * 1E-3). (up +ve). If unknown set to INT32_MAX
+  int32 baroAltMSL = 5 [(mav.opts) = { type: "int32_t" }];
+  // Horizontal accuracy in mm (m * 1E-3). If unknown set to UINT32_MAX
+  uint32 accuracyHor = 6 [(mav.opts) = { type: "uint32_t" }];
+  // Vertical accuracy in cm. If unknown set to UINT16_MAX
+  uint32 accuracyVert = 7 [(mav.opts) = { type: "uint16_t" }];
+  // Velocity accuracy in mm/s (m * 1E-3). If unknown set to UINT16_MAX
+  uint32 accuracyVel = 8 [(mav.opts) = { type: "uint16_t" }];
+  // GPS vertical speed in cm/s. If unknown set to INT16_MAX
+  int32 velVert = 9 [(mav.opts) = { type: "int16_t" }];
+  // North-South velocity over ground in cm/s North +ve. If unknown set to INT16_MAX
+  int32 velNS = 10 [(mav.opts) = { type: "int16_t" }];
+  // East-West velocity over ground in cm/s East +ve. If unknown set to INT16_MAX
+  int32 VelEW = 11 [(mav.opts) = { type: "int16_t" }];
+  // ADS-B transponder dynamic input state flags
+  // bitfield defined by enum UAVIONIX_ADSB_OUT_DYNAMIC_STATE
+  uint32 state = 12 [(mav.opts) = { type: "uint16_t", enum: "UAVIONIX_ADSB_OUT_DYNAMIC_STATE" }];
+  // Mode A code (typically 1200 [0x04B0] for VFR)
+  uint32 squawk = 13 [(mav.opts) = { type: "uint16_t" }];
+  // 0-1: no fix, 2: 2D fix, 3: 3D fix, 4: DGPS, 5: RTK
+  UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX gpsFix = 14 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_OUT_DYNAMIC_GPS_FIX" }];
+  // Number of satellites visible. If unknown set to UINT8_MAX
+  uint32 numSats = 15 [(mav.opts) = { type: "uint8_t" }];
+  // Emergency status
+  UAVIONIX_ADSB_EMERGENCY_STATUS emergencyStatus = 16 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_EMERGENCY_STATUS" }];
+}
+
+// Transceiver heartbeat with health report (updated every 10s)
+message UAVIONIX_ADSB_TRANSCEIVER_HEALTH_REPORT {  // MavLink id: 10003
+  option (mav.message).id = 10003;
+  // ADS-B transponder messages
+  // bitfield defined by enum UAVIONIX_ADSB_RF_HEALTH
+  uint32 rfHealth = 1 [(mav.opts) = { type: "uint8_t", enum: "UAVIONIX_ADSB_RF_HEALTH" }];
+}

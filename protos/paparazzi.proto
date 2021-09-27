@@ -1,0 +1,58 @@
+syntax = "proto3";
+
+package paparazzi;
+
+import "mav.proto";
+
+import "common.proto";
+
+// Message encoding a mission script item. This message is emitted upon a request for the next script item.
+message SCRIPT_ITEM {  // MavLink id: 180
+  option (mav.message).id = 180;
+  // Sequence
+  uint32 seq = 1 [(mav.opts) = { type: "uint16_t" }];
+  // System ID
+  uint32 target_system = 2 [(mav.opts) = { type: "uint8_t" }];
+  // Component ID
+  uint32 target_component = 3 [(mav.opts) = { type: "uint8_t" }];
+  // The name of the mission script, NULL terminated.
+  string name = 4 [(mav.opts) = { type: "char[50]" }];
+}
+
+// Request script item with the sequence number seq. The response of the system to this message should be a SCRIPT_ITEM message.
+message SCRIPT_REQUEST {  // MavLink id: 181
+  option (mav.message).id = 181;
+  // Sequence
+  uint32 seq = 1 [(mav.opts) = { type: "uint16_t" }];
+  // System ID
+  uint32 target_system = 2 [(mav.opts) = { type: "uint8_t" }];
+  // Component ID
+  uint32 target_component = 3 [(mav.opts) = { type: "uint8_t" }];
+}
+
+// Request the overall list of mission items from the system/component.
+message SCRIPT_REQUEST_LIST {  // MavLink id: 182
+  option (mav.message).id = 182;
+  // System ID
+  uint32 target_system = 1 [(mav.opts) = { type: "uint8_t" }];
+  // Component ID
+  uint32 target_component = 2 [(mav.opts) = { type: "uint8_t" }];
+}
+
+// This message is emitted as response to SCRIPT_REQUEST_LIST by the MAV to get the number of mission scripts.
+message SCRIPT_COUNT {  // MavLink id: 183
+  option (mav.message).id = 183;
+  // Number of script items in the sequence
+  uint32 count = 1 [(mav.opts) = { type: "uint16_t" }];
+  // System ID
+  uint32 target_system = 2 [(mav.opts) = { type: "uint8_t" }];
+  // Component ID
+  uint32 target_component = 3 [(mav.opts) = { type: "uint8_t" }];
+}
+
+// This message informs about the currently active SCRIPT.
+message SCRIPT_CURRENT {  // MavLink id: 184
+  option (mav.message).id = 184;
+  // Active Sequence
+  uint32 seq = 1 [(mav.opts) = { type: "uint16_t" }];
+}
