@@ -132,7 +132,7 @@ dependencies = [
 [[package]]
 name = "proto_mav_comm"
 version = "0.10.0"
-source = "git+https://github.com/eucleo/proto-mav-comm.git#3bdd90870c776975707bf6317388f02a076c121b"
+source = "git+https://github.com/eucleo/proto-mav-comm.git#4dc88c7f08622090184b7c22d6b70d31f534b36f"
 dependencies = [
  "bitflags",
  "byteorder",

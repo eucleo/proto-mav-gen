@@ -1165,6 +1165,97 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            150 => crate::proto::matrixpilot::FlexifunctionSet::decode(payload)
+                .map(MavMessage::FlexifunctionSet)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            151 => crate::proto::matrixpilot::FlexifunctionReadReq::decode(payload)
+                .map(MavMessage::FlexifunctionReadReq)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            152 => crate::proto::matrixpilot::FlexifunctionBufferFunction::decode(payload)
+                .map(MavMessage::FlexifunctionBufferFunction)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            153 => crate::proto::matrixpilot::FlexifunctionBufferFunctionAck::decode(payload)
+                .map(MavMessage::FlexifunctionBufferFunctionAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            155 => crate::proto::matrixpilot::FlexifunctionDirectory::decode(payload)
+                .map(MavMessage::FlexifunctionDirectory)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            156 => crate::proto::matrixpilot::FlexifunctionDirectoryAck::decode(payload)
+                .map(MavMessage::FlexifunctionDirectoryAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            157 => crate::proto::matrixpilot::FlexifunctionCommand::decode(payload)
+                .map(MavMessage::FlexifunctionCommand)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            158 => crate::proto::matrixpilot::FlexifunctionCommandAck::decode(payload)
+                .map(MavMessage::FlexifunctionCommandAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            170 => crate::proto::matrixpilot::SerialUdbExtraF2A::decode(payload)
+                .map(MavMessage::SerialUdbExtraF2A)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            171 => crate::proto::matrixpilot::SerialUdbExtraF2B::decode(payload)
+                .map(MavMessage::SerialUdbExtraF2B)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            172 => crate::proto::matrixpilot::SerialUdbExtraF4::decode(payload)
+                .map(MavMessage::SerialUdbExtraF4)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            173 => crate::proto::matrixpilot::SerialUdbExtraF5::decode(payload)
+                .map(MavMessage::SerialUdbExtraF5)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            174 => crate::proto::matrixpilot::SerialUdbExtraF6::decode(payload)
+                .map(MavMessage::SerialUdbExtraF6)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            175 => crate::proto::matrixpilot::SerialUdbExtraF7::decode(payload)
+                .map(MavMessage::SerialUdbExtraF7)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            176 => crate::proto::matrixpilot::SerialUdbExtraF8::decode(payload)
+                .map(MavMessage::SerialUdbExtraF8)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            177 => crate::proto::matrixpilot::SerialUdbExtraF13::decode(payload)
+                .map(MavMessage::SerialUdbExtraF13)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            178 => crate::proto::matrixpilot::SerialUdbExtraF14::decode(payload)
+                .map(MavMessage::SerialUdbExtraF14)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            179 => crate::proto::matrixpilot::SerialUdbExtraF15::decode(payload)
+                .map(MavMessage::SerialUdbExtraF15)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            180 => crate::proto::matrixpilot::SerialUdbExtraF16::decode(payload)
+                .map(MavMessage::SerialUdbExtraF16)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            181 => crate::proto::matrixpilot::Altitudes::decode(payload)
+                .map(MavMessage::Altitudes)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            182 => crate::proto::matrixpilot::Airspeeds::decode(payload)
+                .map(MavMessage::Airspeeds)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            183 => crate::proto::matrixpilot::SerialUdbExtraF17::decode(payload)
+                .map(MavMessage::SerialUdbExtraF17)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            184 => crate::proto::matrixpilot::SerialUdbExtraF18::decode(payload)
+                .map(MavMessage::SerialUdbExtraF18)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            185 => crate::proto::matrixpilot::SerialUdbExtraF19::decode(payload)
+                .map(MavMessage::SerialUdbExtraF19)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            186 => crate::proto::matrixpilot::SerialUdbExtraF20::decode(payload)
+                .map(MavMessage::SerialUdbExtraF20)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            187 => crate::proto::matrixpilot::SerialUdbExtraF21::decode(payload)
+                .map(MavMessage::SerialUdbExtraF21)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            188 => crate::proto::matrixpilot::SerialUdbExtraF22::decode(payload)
+                .map(MavMessage::SerialUdbExtraF22)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::FlexifunctionSet(..) => "FlexifunctionSet",

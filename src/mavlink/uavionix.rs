@@ -211,6 +211,25 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            10001 => crate::proto::uavionix::UavionixAdsbOutCfg::decode(payload)
+                .map(MavMessage::UavionixAdsbOutCfg)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            10002 => crate::proto::uavionix::UavionixAdsbOutDynamic::decode(payload)
+                .map(MavMessage::UavionixAdsbOutDynamic)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            10003 => crate::proto::uavionix::UavionixAdsbTransceiverHealthReport::decode(payload)
+                .map(MavMessage::UavionixAdsbTransceiverHealthReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::UavionixAdsbOutCfg(..) => "UavionixAdsbOutCfg",

@@ -2575,6 +2575,202 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            150 => crate::proto::ardupilotmega::SensorOffsets::decode(payload)
+                .map(MavMessage::SensorOffsets)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            151 => crate::proto::ardupilotmega::SetMagOffsets::decode(payload)
+                .map(MavMessage::SetMagOffsets)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            152 => crate::proto::ardupilotmega::Meminfo::decode(payload)
+                .map(MavMessage::Meminfo)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            153 => crate::proto::ardupilotmega::ApAdc::decode(payload)
+                .map(MavMessage::ApAdc)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            154 => crate::proto::ardupilotmega::DigicamConfigure::decode(payload)
+                .map(MavMessage::DigicamConfigure)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            155 => crate::proto::ardupilotmega::DigicamControl::decode(payload)
+                .map(MavMessage::DigicamControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            156 => crate::proto::ardupilotmega::MountConfigure::decode(payload)
+                .map(MavMessage::MountConfigure)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            157 => crate::proto::ardupilotmega::MountControl::decode(payload)
+                .map(MavMessage::MountControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            158 => crate::proto::ardupilotmega::MountStatus::decode(payload)
+                .map(MavMessage::MountStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            160 => crate::proto::ardupilotmega::FencePoint::decode(payload)
+                .map(MavMessage::FencePoint)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            161 => crate::proto::ardupilotmega::FenceFetchPoint::decode(payload)
+                .map(MavMessage::FenceFetchPoint)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            163 => crate::proto::ardupilotmega::Ahrs::decode(payload)
+                .map(MavMessage::Ahrs)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            164 => crate::proto::ardupilotmega::Simstate::decode(payload)
+                .map(MavMessage::Simstate)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            165 => crate::proto::ardupilotmega::Hwstatus::decode(payload)
+                .map(MavMessage::Hwstatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            166 => crate::proto::ardupilotmega::Radio::decode(payload)
+                .map(MavMessage::Radio)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            167 => crate::proto::ardupilotmega::LimitsStatus::decode(payload)
+                .map(MavMessage::LimitsStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            168 => crate::proto::ardupilotmega::Wind::decode(payload)
+                .map(MavMessage::Wind)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            169 => crate::proto::ardupilotmega::Data16::decode(payload)
+                .map(MavMessage::Data16)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            170 => crate::proto::ardupilotmega::Data32::decode(payload)
+                .map(MavMessage::Data32)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            171 => crate::proto::ardupilotmega::Data64::decode(payload)
+                .map(MavMessage::Data64)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            172 => crate::proto::ardupilotmega::Data96::decode(payload)
+                .map(MavMessage::Data96)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            173 => crate::proto::ardupilotmega::Rangefinder::decode(payload)
+                .map(MavMessage::Rangefinder)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            174 => crate::proto::ardupilotmega::AirspeedAutocal::decode(payload)
+                .map(MavMessage::AirspeedAutocal)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            175 => crate::proto::ardupilotmega::RallyPoint::decode(payload)
+                .map(MavMessage::RallyPoint)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            176 => crate::proto::ardupilotmega::RallyFetchPoint::decode(payload)
+                .map(MavMessage::RallyFetchPoint)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            177 => crate::proto::ardupilotmega::CompassmotStatus::decode(payload)
+                .map(MavMessage::CompassmotStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            178 => crate::proto::ardupilotmega::Ahrs2::decode(payload)
+                .map(MavMessage::Ahrs2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            179 => crate::proto::ardupilotmega::CameraStatus::decode(payload)
+                .map(MavMessage::CameraStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            180 => crate::proto::ardupilotmega::CameraFeedback::decode(payload)
+                .map(MavMessage::CameraFeedback)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            181 => crate::proto::ardupilotmega::Battery2::decode(payload)
+                .map(MavMessage::Battery2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            182 => crate::proto::ardupilotmega::Ahrs3::decode(payload)
+                .map(MavMessage::Ahrs3)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            183 => crate::proto::ardupilotmega::AutopilotVersionRequest::decode(payload)
+                .map(MavMessage::AutopilotVersionRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            184 => crate::proto::ardupilotmega::RemoteLogDataBlock::decode(payload)
+                .map(MavMessage::RemoteLogDataBlock)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            185 => crate::proto::ardupilotmega::RemoteLogBlockStatus::decode(payload)
+                .map(MavMessage::RemoteLogBlockStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            186 => crate::proto::ardupilotmega::LedControl::decode(payload)
+                .map(MavMessage::LedControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            191 => crate::proto::ardupilotmega::MagCalProgress::decode(payload)
+                .map(MavMessage::MagCalProgress)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            192 => crate::proto::ardupilotmega::MagCalReport::decode(payload)
+                .map(MavMessage::MagCalReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            193 => crate::proto::ardupilotmega::EkfStatusReport::decode(payload)
+                .map(MavMessage::EkfStatusReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            194 => crate::proto::ardupilotmega::PidTuning::decode(payload)
+                .map(MavMessage::PidTuning)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            195 => crate::proto::ardupilotmega::Deepstall::decode(payload)
+                .map(MavMessage::Deepstall)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            200 => crate::proto::ardupilotmega::GimbalReport::decode(payload)
+                .map(MavMessage::GimbalReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            201 => crate::proto::ardupilotmega::GimbalControl::decode(payload)
+                .map(MavMessage::GimbalControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            214 => crate::proto::ardupilotmega::GimbalTorqueCmdReport::decode(payload)
+                .map(MavMessage::GimbalTorqueCmdReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            215 => crate::proto::ardupilotmega::GoproHeartbeat::decode(payload)
+                .map(MavMessage::GoproHeartbeat)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            216 => crate::proto::ardupilotmega::GoproGetRequest::decode(payload)
+                .map(MavMessage::GoproGetRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            217 => crate::proto::ardupilotmega::GoproGetResponse::decode(payload)
+                .map(MavMessage::GoproGetResponse)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            218 => crate::proto::ardupilotmega::GoproSetRequest::decode(payload)
+                .map(MavMessage::GoproSetRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            219 => crate::proto::ardupilotmega::GoproSetResponse::decode(payload)
+                .map(MavMessage::GoproSetResponse)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            225 => crate::proto::ardupilotmega::EfiStatus::decode(payload)
+                .map(MavMessage::EfiStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            226 => crate::proto::ardupilotmega::Rpm::decode(payload)
+                .map(MavMessage::Rpm)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11000 => crate::proto::ardupilotmega::DeviceOpRead::decode(payload)
+                .map(MavMessage::DeviceOpRead)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11001 => crate::proto::ardupilotmega::DeviceOpReadReply::decode(payload)
+                .map(MavMessage::DeviceOpReadReply)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11002 => crate::proto::ardupilotmega::DeviceOpWrite::decode(payload)
+                .map(MavMessage::DeviceOpWrite)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11003 => crate::proto::ardupilotmega::DeviceOpWriteReply::decode(payload)
+                .map(MavMessage::DeviceOpWriteReply)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11010 => crate::proto::ardupilotmega::AdapTuning::decode(payload)
+                .map(MavMessage::AdapTuning)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11011 => crate::proto::ardupilotmega::VisionPositionDelta::decode(payload)
+                .map(MavMessage::VisionPositionDelta)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11020 => crate::proto::ardupilotmega::AoaSsa::decode(payload)
+                .map(MavMessage::AoaSsa)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11030 => crate::proto::ardupilotmega::EscTelemetry1To4::decode(payload)
+                .map(MavMessage::EscTelemetry1To4)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11031 => crate::proto::ardupilotmega::EscTelemetry5To8::decode(payload)
+                .map(MavMessage::EscTelemetry5To8)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11032 => crate::proto::ardupilotmega::EscTelemetry9To12::decode(payload)
+                .map(MavMessage::EscTelemetry9To12)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                if let Ok(msg) = crate::mavlink::uavionix::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Uavionix(msg));
+                }
+                if let Ok(msg) = crate::mavlink::icarous::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Icarous(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::SensorOffsets(..) => "SensorOffsets",

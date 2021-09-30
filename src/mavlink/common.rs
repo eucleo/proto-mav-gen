@@ -9325,6 +9325,620 @@ impl Message for MavMessage {
             _ => Err(ParserError::UnknownMessage { id }),
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            0 => crate::proto::common::Heartbeat::decode(payload)
+                .map(MavMessage::Heartbeat)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            1 => crate::proto::common::SysStatus::decode(payload)
+                .map(MavMessage::SysStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            2 => crate::proto::common::SystemTime::decode(payload)
+                .map(MavMessage::SystemTime)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            4 => crate::proto::common::Ping::decode(payload)
+                .map(MavMessage::Ping)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            5 => crate::proto::common::ChangeOperatorControl::decode(payload)
+                .map(MavMessage::ChangeOperatorControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            6 => crate::proto::common::ChangeOperatorControlAck::decode(payload)
+                .map(MavMessage::ChangeOperatorControlAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            7 => crate::proto::common::AuthKey::decode(payload)
+                .map(MavMessage::AuthKey)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            8 => crate::proto::common::LinkNodeStatus::decode(payload)
+                .map(MavMessage::LinkNodeStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            11 => crate::proto::common::SetMode::decode(payload)
+                .map(MavMessage::SetMode)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            20 => crate::proto::common::ParamRequestRead::decode(payload)
+                .map(MavMessage::ParamRequestRead)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            21 => crate::proto::common::ParamRequestList::decode(payload)
+                .map(MavMessage::ParamRequestList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            22 => crate::proto::common::ParamValue::decode(payload)
+                .map(MavMessage::ParamValue)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            23 => crate::proto::common::ParamSet::decode(payload)
+                .map(MavMessage::ParamSet)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            24 => crate::proto::common::GpsRawInt::decode(payload)
+                .map(MavMessage::GpsRawInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            25 => crate::proto::common::GpsStatus::decode(payload)
+                .map(MavMessage::GpsStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            26 => crate::proto::common::ScaledImu::decode(payload)
+                .map(MavMessage::ScaledImu)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            27 => crate::proto::common::RawImu::decode(payload)
+                .map(MavMessage::RawImu)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            28 => crate::proto::common::RawPressure::decode(payload)
+                .map(MavMessage::RawPressure)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            29 => crate::proto::common::ScaledPressure::decode(payload)
+                .map(MavMessage::ScaledPressure)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            30 => crate::proto::common::Attitude::decode(payload)
+                .map(MavMessage::Attitude)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            31 => crate::proto::common::AttitudeQuaternion::decode(payload)
+                .map(MavMessage::AttitudeQuaternion)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            32 => crate::proto::common::LocalPositionNed::decode(payload)
+                .map(MavMessage::LocalPositionNed)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            33 => crate::proto::common::GlobalPositionInt::decode(payload)
+                .map(MavMessage::GlobalPositionInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            34 => crate::proto::common::RcChannelsScaled::decode(payload)
+                .map(MavMessage::RcChannelsScaled)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            35 => crate::proto::common::RcChannelsRaw::decode(payload)
+                .map(MavMessage::RcChannelsRaw)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            36 => crate::proto::common::ServoOutputRaw::decode(payload)
+                .map(MavMessage::ServoOutputRaw)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            37 => crate::proto::common::MissionRequestPartialList::decode(payload)
+                .map(MavMessage::MissionRequestPartialList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            38 => crate::proto::common::MissionWritePartialList::decode(payload)
+                .map(MavMessage::MissionWritePartialList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            39 => crate::proto::common::MissionItem::decode(payload)
+                .map(MavMessage::MissionItem)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            40 => crate::proto::common::MissionRequest::decode(payload)
+                .map(MavMessage::MissionRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            41 => crate::proto::common::MissionSetCurrent::decode(payload)
+                .map(MavMessage::MissionSetCurrent)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            42 => crate::proto::common::MissionCurrent::decode(payload)
+                .map(MavMessage::MissionCurrent)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            43 => crate::proto::common::MissionRequestList::decode(payload)
+                .map(MavMessage::MissionRequestList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            44 => crate::proto::common::MissionCount::decode(payload)
+                .map(MavMessage::MissionCount)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            45 => crate::proto::common::MissionClearAll::decode(payload)
+                .map(MavMessage::MissionClearAll)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            46 => crate::proto::common::MissionItemReached::decode(payload)
+                .map(MavMessage::MissionItemReached)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            47 => crate::proto::common::MissionAck::decode(payload)
+                .map(MavMessage::MissionAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            48 => crate::proto::common::SetGpsGlobalOrigin::decode(payload)
+                .map(MavMessage::SetGpsGlobalOrigin)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            49 => crate::proto::common::GpsGlobalOrigin::decode(payload)
+                .map(MavMessage::GpsGlobalOrigin)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            50 => crate::proto::common::ParamMapRc::decode(payload)
+                .map(MavMessage::ParamMapRc)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            51 => crate::proto::common::MissionRequestInt::decode(payload)
+                .map(MavMessage::MissionRequestInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            52 => crate::proto::common::MissionChanged::decode(payload)
+                .map(MavMessage::MissionChanged)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            54 => crate::proto::common::SafetySetAllowedArea::decode(payload)
+                .map(MavMessage::SafetySetAllowedArea)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            55 => crate::proto::common::SafetyAllowedArea::decode(payload)
+                .map(MavMessage::SafetyAllowedArea)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            61 => crate::proto::common::AttitudeQuaternionCov::decode(payload)
+                .map(MavMessage::AttitudeQuaternionCov)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            62 => crate::proto::common::NavControllerOutput::decode(payload)
+                .map(MavMessage::NavControllerOutput)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            63 => crate::proto::common::GlobalPositionIntCov::decode(payload)
+                .map(MavMessage::GlobalPositionIntCov)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            64 => crate::proto::common::LocalPositionNedCov::decode(payload)
+                .map(MavMessage::LocalPositionNedCov)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            65 => crate::proto::common::RcChannels::decode(payload)
+                .map(MavMessage::RcChannels)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            66 => crate::proto::common::RequestDataStream::decode(payload)
+                .map(MavMessage::RequestDataStream)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            67 => crate::proto::common::DataStream::decode(payload)
+                .map(MavMessage::DataStream)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            69 => crate::proto::common::ManualControl::decode(payload)
+                .map(MavMessage::ManualControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            70 => crate::proto::common::RcChannelsOverride::decode(payload)
+                .map(MavMessage::RcChannelsOverride)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            73 => crate::proto::common::MissionItemInt::decode(payload)
+                .map(MavMessage::MissionItemInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            74 => crate::proto::common::VfrHud::decode(payload)
+                .map(MavMessage::VfrHud)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            75 => crate::proto::common::CommandInt::decode(payload)
+                .map(MavMessage::CommandInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            76 => crate::proto::common::CommandLong::decode(payload)
+                .map(MavMessage::CommandLong)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            77 => crate::proto::common::CommandAck::decode(payload)
+                .map(MavMessage::CommandAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            80 => crate::proto::common::CommandCancel::decode(payload)
+                .map(MavMessage::CommandCancel)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            81 => crate::proto::common::ManualSetpoint::decode(payload)
+                .map(MavMessage::ManualSetpoint)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            82 => crate::proto::common::SetAttitudeTarget::decode(payload)
+                .map(MavMessage::SetAttitudeTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            83 => crate::proto::common::AttitudeTarget::decode(payload)
+                .map(MavMessage::AttitudeTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            84 => crate::proto::common::SetPositionTargetLocalNed::decode(payload)
+                .map(MavMessage::SetPositionTargetLocalNed)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            85 => crate::proto::common::PositionTargetLocalNed::decode(payload)
+                .map(MavMessage::PositionTargetLocalNed)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            86 => crate::proto::common::SetPositionTargetGlobalInt::decode(payload)
+                .map(MavMessage::SetPositionTargetGlobalInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            87 => crate::proto::common::PositionTargetGlobalInt::decode(payload)
+                .map(MavMessage::PositionTargetGlobalInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            89 => crate::proto::common::LocalPositionNedSystemGlobalOffset::decode(payload)
+                .map(MavMessage::LocalPositionNedSystemGlobalOffset)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            90 => crate::proto::common::HilState::decode(payload)
+                .map(MavMessage::HilState)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            91 => crate::proto::common::HilControls::decode(payload)
+                .map(MavMessage::HilControls)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            92 => crate::proto::common::HilRcInputsRaw::decode(payload)
+                .map(MavMessage::HilRcInputsRaw)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            93 => crate::proto::common::HilActuatorControls::decode(payload)
+                .map(MavMessage::HilActuatorControls)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            100 => crate::proto::common::OpticalFlow::decode(payload)
+                .map(MavMessage::OpticalFlow)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            101 => crate::proto::common::GlobalVisionPositionEstimate::decode(payload)
+                .map(MavMessage::GlobalVisionPositionEstimate)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            102 => crate::proto::common::VisionPositionEstimate::decode(payload)
+                .map(MavMessage::VisionPositionEstimate)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            103 => crate::proto::common::VisionSpeedEstimate::decode(payload)
+                .map(MavMessage::VisionSpeedEstimate)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            104 => crate::proto::common::ViconPositionEstimate::decode(payload)
+                .map(MavMessage::ViconPositionEstimate)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            105 => crate::proto::common::HighresImu::decode(payload)
+                .map(MavMessage::HighresImu)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            106 => crate::proto::common::OpticalFlowRad::decode(payload)
+                .map(MavMessage::OpticalFlowRad)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            107 => crate::proto::common::HilSensor::decode(payload)
+                .map(MavMessage::HilSensor)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            108 => crate::proto::common::SimState::decode(payload)
+                .map(MavMessage::SimState)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            109 => crate::proto::common::RadioStatus::decode(payload)
+                .map(MavMessage::RadioStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            110 => crate::proto::common::FileTransferProtocol::decode(payload)
+                .map(MavMessage::FileTransferProtocol)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            111 => crate::proto::common::Timesync::decode(payload)
+                .map(MavMessage::Timesync)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            112 => crate::proto::common::CameraTrigger::decode(payload)
+                .map(MavMessage::CameraTrigger)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            113 => crate::proto::common::HilGps::decode(payload)
+                .map(MavMessage::HilGps)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            114 => crate::proto::common::HilOpticalFlow::decode(payload)
+                .map(MavMessage::HilOpticalFlow)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            115 => crate::proto::common::HilStateQuaternion::decode(payload)
+                .map(MavMessage::HilStateQuaternion)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            116 => crate::proto::common::ScaledImu2::decode(payload)
+                .map(MavMessage::ScaledImu2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            117 => crate::proto::common::LogRequestList::decode(payload)
+                .map(MavMessage::LogRequestList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            118 => crate::proto::common::LogEntry::decode(payload)
+                .map(MavMessage::LogEntry)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            119 => crate::proto::common::LogRequestData::decode(payload)
+                .map(MavMessage::LogRequestData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            120 => crate::proto::common::LogData::decode(payload)
+                .map(MavMessage::LogData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            121 => crate::proto::common::LogErase::decode(payload)
+                .map(MavMessage::LogErase)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            122 => crate::proto::common::LogRequestEnd::decode(payload)
+                .map(MavMessage::LogRequestEnd)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            123 => crate::proto::common::GpsInjectData::decode(payload)
+                .map(MavMessage::GpsInjectData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            124 => crate::proto::common::Gps2Raw::decode(payload)
+                .map(MavMessage::Gps2Raw)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            125 => crate::proto::common::PowerStatus::decode(payload)
+                .map(MavMessage::PowerStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            126 => crate::proto::common::SerialControl::decode(payload)
+                .map(MavMessage::SerialControl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            127 => crate::proto::common::GpsRtk::decode(payload)
+                .map(MavMessage::GpsRtk)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            128 => crate::proto::common::Gps2Rtk::decode(payload)
+                .map(MavMessage::Gps2Rtk)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            129 => crate::proto::common::ScaledImu3::decode(payload)
+                .map(MavMessage::ScaledImu3)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            130 => crate::proto::common::DataTransmissionHandshake::decode(payload)
+                .map(MavMessage::DataTransmissionHandshake)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            131 => crate::proto::common::EncapsulatedData::decode(payload)
+                .map(MavMessage::EncapsulatedData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            132 => crate::proto::common::DistanceSensor::decode(payload)
+                .map(MavMessage::DistanceSensor)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            133 => crate::proto::common::TerrainRequest::decode(payload)
+                .map(MavMessage::TerrainRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            134 => crate::proto::common::TerrainData::decode(payload)
+                .map(MavMessage::TerrainData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            135 => crate::proto::common::TerrainCheck::decode(payload)
+                .map(MavMessage::TerrainCheck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            136 => crate::proto::common::TerrainReport::decode(payload)
+                .map(MavMessage::TerrainReport)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            137 => crate::proto::common::ScaledPressure2::decode(payload)
+                .map(MavMessage::ScaledPressure2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            138 => crate::proto::common::AttPosMocap::decode(payload)
+                .map(MavMessage::AttPosMocap)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            139 => crate::proto::common::SetActuatorControlTarget::decode(payload)
+                .map(MavMessage::SetActuatorControlTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            140 => crate::proto::common::ActuatorControlTarget::decode(payload)
+                .map(MavMessage::ActuatorControlTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            141 => crate::proto::common::Altitude::decode(payload)
+                .map(MavMessage::Altitude)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            142 => crate::proto::common::ResourceRequest::decode(payload)
+                .map(MavMessage::ResourceRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            143 => crate::proto::common::ScaledPressure3::decode(payload)
+                .map(MavMessage::ScaledPressure3)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            144 => crate::proto::common::FollowTarget::decode(payload)
+                .map(MavMessage::FollowTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            146 => crate::proto::common::ControlSystemState::decode(payload)
+                .map(MavMessage::ControlSystemState)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            147 => crate::proto::common::BatteryStatus::decode(payload)
+                .map(MavMessage::BatteryStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            148 => crate::proto::common::AutopilotVersion::decode(payload)
+                .map(MavMessage::AutopilotVersion)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            149 => crate::proto::common::LandingTarget::decode(payload)
+                .map(MavMessage::LandingTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            162 => crate::proto::common::FenceStatus::decode(payload)
+                .map(MavMessage::FenceStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            230 => crate::proto::common::EstimatorStatus::decode(payload)
+                .map(MavMessage::EstimatorStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            231 => crate::proto::common::WindCov::decode(payload)
+                .map(MavMessage::WindCov)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            232 => crate::proto::common::GpsInput::decode(payload)
+                .map(MavMessage::GpsInput)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            233 => crate::proto::common::GpsRtcmData::decode(payload)
+                .map(MavMessage::GpsRtcmData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            234 => crate::proto::common::HighLatency::decode(payload)
+                .map(MavMessage::HighLatency)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            235 => crate::proto::common::HighLatency2::decode(payload)
+                .map(MavMessage::HighLatency2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            241 => crate::proto::common::Vibration::decode(payload)
+                .map(MavMessage::Vibration)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            242 => crate::proto::common::HomePosition::decode(payload)
+                .map(MavMessage::HomePosition)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            243 => crate::proto::common::SetHomePosition::decode(payload)
+                .map(MavMessage::SetHomePosition)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            244 => crate::proto::common::MessageInterval::decode(payload)
+                .map(MavMessage::MessageInterval)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            245 => crate::proto::common::ExtendedSysState::decode(payload)
+                .map(MavMessage::ExtendedSysState)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            246 => crate::proto::common::AdsbVehicle::decode(payload)
+                .map(MavMessage::AdsbVehicle)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            247 => crate::proto::common::Collision::decode(payload)
+                .map(MavMessage::Collision)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            248 => crate::proto::common::V2Extension::decode(payload)
+                .map(MavMessage::V2Extension)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            249 => crate::proto::common::MemoryVect::decode(payload)
+                .map(MavMessage::MemoryVect)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            250 => crate::proto::common::DebugVect::decode(payload)
+                .map(MavMessage::DebugVect)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            251 => crate::proto::common::NamedValueFloat::decode(payload)
+                .map(MavMessage::NamedValueFloat)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            252 => crate::proto::common::NamedValueInt::decode(payload)
+                .map(MavMessage::NamedValueInt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            253 => crate::proto::common::Statustext::decode(payload)
+                .map(MavMessage::Statustext)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            254 => crate::proto::common::Debug::decode(payload)
+                .map(MavMessage::Debug)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            256 => crate::proto::common::SetupSigning::decode(payload)
+                .map(MavMessage::SetupSigning)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            257 => crate::proto::common::ButtonChange::decode(payload)
+                .map(MavMessage::ButtonChange)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            258 => crate::proto::common::PlayTune::decode(payload)
+                .map(MavMessage::PlayTune)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            259 => crate::proto::common::CameraInformation::decode(payload)
+                .map(MavMessage::CameraInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            260 => crate::proto::common::CameraSettings::decode(payload)
+                .map(MavMessage::CameraSettings)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            261 => crate::proto::common::StorageInformation::decode(payload)
+                .map(MavMessage::StorageInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            262 => crate::proto::common::CameraCaptureStatus::decode(payload)
+                .map(MavMessage::CameraCaptureStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            263 => crate::proto::common::CameraImageCaptured::decode(payload)
+                .map(MavMessage::CameraImageCaptured)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            264 => crate::proto::common::FlightInformation::decode(payload)
+                .map(MavMessage::FlightInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            265 => crate::proto::common::MountOrientation::decode(payload)
+                .map(MavMessage::MountOrientation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            266 => crate::proto::common::LoggingData::decode(payload)
+                .map(MavMessage::LoggingData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            267 => crate::proto::common::LoggingDataAcked::decode(payload)
+                .map(MavMessage::LoggingDataAcked)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            268 => crate::proto::common::LoggingAck::decode(payload)
+                .map(MavMessage::LoggingAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            269 => crate::proto::common::VideoStreamInformation::decode(payload)
+                .map(MavMessage::VideoStreamInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            270 => crate::proto::common::VideoStreamStatus::decode(payload)
+                .map(MavMessage::VideoStreamStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            280 => crate::proto::common::GimbalManagerInformation::decode(payload)
+                .map(MavMessage::GimbalManagerInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            281 => crate::proto::common::GimbalManagerStatus::decode(payload)
+                .map(MavMessage::GimbalManagerStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            282 => crate::proto::common::GimbalManagerSetAttitude::decode(payload)
+                .map(MavMessage::GimbalManagerSetAttitude)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            283 => crate::proto::common::GimbalDeviceInformation::decode(payload)
+                .map(MavMessage::GimbalDeviceInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            284 => crate::proto::common::GimbalDeviceSetAttitude::decode(payload)
+                .map(MavMessage::GimbalDeviceSetAttitude)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            285 => crate::proto::common::GimbalDeviceAttitudeStatus::decode(payload)
+                .map(MavMessage::GimbalDeviceAttitudeStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            286 => crate::proto::common::AutopilotStateForGimbalDevice::decode(payload)
+                .map(MavMessage::AutopilotStateForGimbalDevice)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            287 => crate::proto::common::GimbalManagerSetTiltpan::decode(payload)
+                .map(MavMessage::GimbalManagerSetTiltpan)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            299 => crate::proto::common::WifiConfigAp::decode(payload)
+                .map(MavMessage::WifiConfigAp)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            300 => crate::proto::common::ProtocolVersion::decode(payload)
+                .map(MavMessage::ProtocolVersion)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            301 => crate::proto::common::AisVessel::decode(payload)
+                .map(MavMessage::AisVessel)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            310 => crate::proto::common::UavcanNodeStatus::decode(payload)
+                .map(MavMessage::UavcanNodeStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            311 => crate::proto::common::UavcanNodeInfo::decode(payload)
+                .map(MavMessage::UavcanNodeInfo)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            320 => crate::proto::common::ParamExtRequestRead::decode(payload)
+                .map(MavMessage::ParamExtRequestRead)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            321 => crate::proto::common::ParamExtRequestList::decode(payload)
+                .map(MavMessage::ParamExtRequestList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            322 => crate::proto::common::ParamExtValue::decode(payload)
+                .map(MavMessage::ParamExtValue)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            323 => crate::proto::common::ParamExtSet::decode(payload)
+                .map(MavMessage::ParamExtSet)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            324 => crate::proto::common::ParamExtAck::decode(payload)
+                .map(MavMessage::ParamExtAck)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            330 => crate::proto::common::ObstacleDistance::decode(payload)
+                .map(MavMessage::ObstacleDistance)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            331 => crate::proto::common::Odometry::decode(payload)
+                .map(MavMessage::Odometry)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            332 => crate::proto::common::TrajectoryRepresentationWaypoints::decode(payload)
+                .map(MavMessage::TrajectoryRepresentationWaypoints)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            333 => crate::proto::common::TrajectoryRepresentationBezier::decode(payload)
+                .map(MavMessage::TrajectoryRepresentationBezier)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            334 => crate::proto::common::CellularStatus::decode(payload)
+                .map(MavMessage::CellularStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            335 => crate::proto::common::IsbdLinkStatus::decode(payload)
+                .map(MavMessage::IsbdLinkStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            336 => crate::proto::common::CellularConfig::decode(payload)
+                .map(MavMessage::CellularConfig)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            339 => crate::proto::common::RawRpm::decode(payload)
+                .map(MavMessage::RawRpm)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            340 => crate::proto::common::UtmGlobalPosition::decode(payload)
+                .map(MavMessage::UtmGlobalPosition)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            350 => crate::proto::common::DebugFloatArray::decode(payload)
+                .map(MavMessage::DebugFloatArray)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            360 => crate::proto::common::OrbitExecutionStatus::decode(payload)
+                .map(MavMessage::OrbitExecutionStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            370 => crate::proto::common::SmartBatteryInfo::decode(payload)
+                .map(MavMessage::SmartBatteryInfo)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            371 => crate::proto::common::SmartBatteryStatus::decode(payload)
+                .map(MavMessage::SmartBatteryStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            373 => crate::proto::common::GeneratorStatus::decode(payload)
+                .map(MavMessage::GeneratorStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            375 => crate::proto::common::ActuatorOutputStatus::decode(payload)
+                .map(MavMessage::ActuatorOutputStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            380 => crate::proto::common::TimeEstimateToTarget::decode(payload)
+                .map(MavMessage::TimeEstimateToTarget)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            385 => crate::proto::common::Tunnel::decode(payload)
+                .map(MavMessage::Tunnel)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            390 => crate::proto::common::OnboardComputerStatus::decode(payload)
+                .map(MavMessage::OnboardComputerStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            395 => crate::proto::common::ComponentInformation::decode(payload)
+                .map(MavMessage::ComponentInformation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            400 => crate::proto::common::PlayTuneV2::decode(payload)
+                .map(MavMessage::PlayTuneV2)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            401 => crate::proto::common::SupportedTunes::decode(payload)
+                .map(MavMessage::SupportedTunes)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            9000 => crate::proto::common::WheelDistance::decode(payload)
+                .map(MavMessage::WheelDistance)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12900 => crate::proto::common::OpenDroneIdBasicId::decode(payload)
+                .map(MavMessage::OpenDroneIdBasicId)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12901 => crate::proto::common::OpenDroneIdLocation::decode(payload)
+                .map(MavMessage::OpenDroneIdLocation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12902 => crate::proto::common::OpenDroneIdAuthentication::decode(payload)
+                .map(MavMessage::OpenDroneIdAuthentication)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12903 => crate::proto::common::OpenDroneIdSelfId::decode(payload)
+                .map(MavMessage::OpenDroneIdSelfId)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12904 => crate::proto::common::OpenDroneIdSystem::decode(payload)
+                .map(MavMessage::OpenDroneIdSystem)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12905 => crate::proto::common::OpenDroneIdOperatorId::decode(payload)
+                .map(MavMessage::OpenDroneIdOperatorId)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            12915 => crate::proto::common::OpenDroneIdMessagePack::decode(payload)
+                .map(MavMessage::OpenDroneIdMessagePack)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => Err(ParserError::UnknownMessage { id }),
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::Heartbeat(..) => "Heartbeat",

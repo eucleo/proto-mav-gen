@@ -37,6 +37,16 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::Common(msg) => msg.message_name(),

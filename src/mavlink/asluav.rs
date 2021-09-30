@@ -765,6 +765,61 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            78 => crate::proto::asluav::CommandIntStamped::decode(payload)
+                .map(MavMessage::CommandIntStamped)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            79 => crate::proto::asluav::CommandLongStamped::decode(payload)
+                .map(MavMessage::CommandLongStamped)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            201 => crate::proto::asluav::SensPower::decode(payload)
+                .map(MavMessage::SensPower)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            202 => crate::proto::asluav::SensMppt::decode(payload)
+                .map(MavMessage::SensMppt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            203 => crate::proto::asluav::AslctrlData::decode(payload)
+                .map(MavMessage::AslctrlData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            204 => crate::proto::asluav::AslctrlDebug::decode(payload)
+                .map(MavMessage::AslctrlDebug)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            205 => crate::proto::asluav::AsluavStatus::decode(payload)
+                .map(MavMessage::AsluavStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            206 => crate::proto::asluav::EkfExt::decode(payload)
+                .map(MavMessage::EkfExt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            207 => crate::proto::asluav::AslObctrl::decode(payload)
+                .map(MavMessage::AslObctrl)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            208 => crate::proto::asluav::SensAtmos::decode(payload)
+                .map(MavMessage::SensAtmos)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            209 => crate::proto::asluav::SensBatmon::decode(payload)
+                .map(MavMessage::SensBatmon)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            210 => crate::proto::asluav::FwSoaringData::decode(payload)
+                .map(MavMessage::FwSoaringData)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            211 => crate::proto::asluav::SensorpodStatus::decode(payload)
+                .map(MavMessage::SensorpodStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            212 => crate::proto::asluav::SensPowerBoard::decode(payload)
+                .map(MavMessage::SensPowerBoard)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            213 => crate::proto::asluav::GsmLinkStatus::decode(payload)
+                .map(MavMessage::GsmLinkStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::CommandIntStamped(..) => "CommandIntStamped",

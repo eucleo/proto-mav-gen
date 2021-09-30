@@ -724,6 +724,76 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            170 => crate::proto::slugs::CpuLoad::decode(payload)
+                .map(MavMessage::CpuLoad)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            172 => crate::proto::slugs::SensorBias::decode(payload)
+                .map(MavMessage::SensorBias)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            173 => crate::proto::slugs::Diagnostic::decode(payload)
+                .map(MavMessage::Diagnostic)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            176 => crate::proto::slugs::SlugsNavigation::decode(payload)
+                .map(MavMessage::SlugsNavigation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            177 => crate::proto::slugs::DataLog::decode(payload)
+                .map(MavMessage::DataLog)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            179 => crate::proto::slugs::GpsDateTime::decode(payload)
+                .map(MavMessage::GpsDateTime)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            180 => crate::proto::slugs::MidLvlCmds::decode(payload)
+                .map(MavMessage::MidLvlCmds)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            181 => crate::proto::slugs::CtrlSrfcPt::decode(payload)
+                .map(MavMessage::CtrlSrfcPt)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            184 => crate::proto::slugs::SlugsCameraOrder::decode(payload)
+                .map(MavMessage::SlugsCameraOrder)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            185 => crate::proto::slugs::ControlSurface::decode(payload)
+                .map(MavMessage::ControlSurface)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            186 => crate::proto::slugs::SlugsMobileLocation::decode(payload)
+                .map(MavMessage::SlugsMobileLocation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            188 => crate::proto::slugs::SlugsConfigurationCamera::decode(payload)
+                .map(MavMessage::SlugsConfigurationCamera)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            189 => crate::proto::slugs::IsrLocation::decode(payload)
+                .map(MavMessage::IsrLocation)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            191 => crate::proto::slugs::VoltSensor::decode(payload)
+                .map(MavMessage::VoltSensor)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            192 => crate::proto::slugs::PtzStatus::decode(payload)
+                .map(MavMessage::PtzStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            193 => crate::proto::slugs::UavStatus::decode(payload)
+                .map(MavMessage::UavStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            194 => crate::proto::slugs::StatusGps::decode(payload)
+                .map(MavMessage::StatusGps)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            195 => crate::proto::slugs::NovatelDiag::decode(payload)
+                .map(MavMessage::NovatelDiag)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            196 => crate::proto::slugs::SensorDiag::decode(payload)
+                .map(MavMessage::SensorDiag)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            197 => crate::proto::slugs::Boot::decode(payload)
+                .map(MavMessage::Boot)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::CpuLoad(..) => "CpuLoad",

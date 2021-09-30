@@ -160,6 +160,14 @@ impl Message for MavMessage {
             _ => Err(ParserError::UnknownMessage { id }),
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            0 => crate::proto::test::TestTypes::decode(payload)
+                .map(MavMessage::TestTypes)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => Err(ParserError::UnknownMessage { id }),
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::TestTypes(..) => "TestTypes",

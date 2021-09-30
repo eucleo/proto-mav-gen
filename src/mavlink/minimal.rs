@@ -125,6 +125,17 @@ impl Message for MavMessage {
             _ => Err(ParserError::UnknownMessage { id }),
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            0 => crate::proto::minimal::Heartbeat::decode(payload)
+                .map(MavMessage::Heartbeat)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            300 => crate::proto::minimal::ProtocolVersion::decode(payload)
+                .map(MavMessage::ProtocolVersion)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => Err(ParserError::UnknownMessage { id }),
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::Heartbeat(..) => "Heartbeat",

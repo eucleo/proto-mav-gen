@@ -177,6 +177,25 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            220 => crate::proto::ualberta::NavFilterBias::decode(payload)
+                .map(MavMessage::NavFilterBias)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            221 => crate::proto::ualberta::RadioCalibration::decode(payload)
+                .map(MavMessage::RadioCalibration)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            222 => crate::proto::ualberta::UalbertaSysStatus::decode(payload)
+                .map(MavMessage::UalbertaSysStatus)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::NavFilterBias(..) => "NavFilterBias",

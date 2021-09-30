@@ -189,6 +189,31 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            180 => crate::proto::paparazzi::ScriptItem::decode(payload)
+                .map(MavMessage::ScriptItem)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            181 => crate::proto::paparazzi::ScriptRequest::decode(payload)
+                .map(MavMessage::ScriptRequest)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            182 => crate::proto::paparazzi::ScriptRequestList::decode(payload)
+                .map(MavMessage::ScriptRequestList)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            183 => crate::proto::paparazzi::ScriptCount::decode(payload)
+                .map(MavMessage::ScriptCount)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            184 => crate::proto::paparazzi::ScriptCurrent::decode(payload)
+                .map(MavMessage::ScriptCurrent)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::ScriptItem(..) => "ScriptItem",

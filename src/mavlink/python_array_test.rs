@@ -475,6 +475,40 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            150 => crate::proto::python_array_test::ArrayTest0::decode(payload)
+                .map(MavMessage::ArrayTest0)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            151 => crate::proto::python_array_test::ArrayTest1::decode(payload)
+                .map(MavMessage::ArrayTest1)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            153 => crate::proto::python_array_test::ArrayTest3::decode(payload)
+                .map(MavMessage::ArrayTest3)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            154 => crate::proto::python_array_test::ArrayTest4::decode(payload)
+                .map(MavMessage::ArrayTest4)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            155 => crate::proto::python_array_test::ArrayTest5::decode(payload)
+                .map(MavMessage::ArrayTest5)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            156 => crate::proto::python_array_test::ArrayTest6::decode(payload)
+                .map(MavMessage::ArrayTest6)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            157 => crate::proto::python_array_test::ArrayTest7::decode(payload)
+                .map(MavMessage::ArrayTest7)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            158 => crate::proto::python_array_test::ArrayTest8::decode(payload)
+                .map(MavMessage::ArrayTest8)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::ArrayTest0(..) => "ArrayTest0",

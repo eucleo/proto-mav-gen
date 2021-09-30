@@ -175,6 +175,22 @@ impl Message for MavMessage {
             }
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            150 => crate::proto::autoquad::AqTelemetryF::decode(payload)
+                .map(MavMessage::AqTelemetryF)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            152 => crate::proto::autoquad::AqEscTelemetry::decode(payload)
+                .map(MavMessage::AqEscTelemetry)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => {
+                if let Ok(msg) = crate::mavlink::common::MavMessage::proto_parse(id, payload) {
+                    return Ok(MavMessage::Common(msg));
+                }
+                Err(ParserError::UnknownMessage { id })
+            }
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::AqTelemetryF(..) => "AqTelemetryF",

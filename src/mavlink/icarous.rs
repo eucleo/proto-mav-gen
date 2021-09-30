@@ -132,6 +132,17 @@ impl Message for MavMessage {
             _ => Err(ParserError::UnknownMessage { id }),
         }
     }
+    fn proto_parse(id: u32, payload: &[u8]) -> Result<MavMessage, ParserError> {
+        match id {
+            42000 => crate::proto::icarous::IcarousHeartbeat::decode(payload)
+                .map(MavMessage::IcarousHeartbeat)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            42001 => crate::proto::icarous::IcarousKinematicBands::decode(payload)
+                .map(MavMessage::IcarousKinematicBands)
+                .map_err(|error| ParserError::ProstDecode { error }),
+            _ => Err(ParserError::UnknownMessage { id }),
+        }
+    }
     fn message_name(&self) -> &'static str {
         match self {
             MavMessage::IcarousHeartbeat(..) => "IcarousHeartbeat",
