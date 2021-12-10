@@ -1,4 +1,4 @@
-/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at https://mavlink.io/en/services/heartbeat.html
+/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at <https://mavlink.io/en/services/heartbeat.html>
 ///
 /// MavLink id: 55000
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -158,7 +158,7 @@ pub enum MavType {
     Flarm = 32,
     /// Servo
     Servo = 33,
-    /// Open Drone ID. See https://mavlink.io/en/services/opendroneid.html.
+    /// Open Drone ID. See <https://mavlink.io/en/services/opendroneid.html.>
     Odid = 34,
     /// aliens!
     Ufo = 100,

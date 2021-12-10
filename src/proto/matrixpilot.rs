@@ -1446,7 +1446,7 @@ pub enum MavCmd {
     /// MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude
     /// MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude
     /// ***** END Params
-    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamConfigure = 202,
     /// ***** START Params
     /// Modes: P, TV, AV, M, Etc.
@@ -1457,7 +1457,7 @@ pub enum MavCmd {
     /// Command Identity.
     /// Main engine cut-off time before camera trigger. (0 means no cut-off)
     /// ***** END Params
-    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamControl = 203,
     /// ***** START Params
     /// Session control e.g. show/hide lens
@@ -1688,7 +1688,7 @@ pub enum MavCmd {
     /// Reserved (set to 0)
     /// WIP: ID (e.g. camera ID -1 for all IDs)
     /// ***** END Params
-    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: https://mavlink.io/en/services/command.html.
+    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: <https://mavlink.io/en/services/command.html.>
     DoUpgrade = 247,
     /// ***** START Params
     /// Component id of the component to be upgraded. If set to 0, all components should be upgraded.

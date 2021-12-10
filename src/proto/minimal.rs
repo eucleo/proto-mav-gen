@@ -1,4 +1,4 @@
-/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at https://mavlink.io/en/services/heartbeat.html
+/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at <https://mavlink.io/en/services/heartbeat.html>
 ///
 /// MavLink id: 0
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -64,11 +64,11 @@ pub enum MavAutopilot {
     Generic = 0,
     /// Reserved for future use.
     Reserved = 1,
-    /// SLUGS autopilot, http://slugsuav.soe.ucsc.edu
+    /// SLUGS autopilot, <http://slugsuav.soe.ucsc.edu>
     Slugs = 2,
-    /// ArduPilot - Plane/Copter/Rover/Sub/Tracker, http://ardupilot.org
+    /// ArduPilot - Plane/Copter/Rover/Sub/Tracker, <http://ardupilot.org>
     Ardupilotmega = 3,
-    /// OpenPilot, http://openpilot.org
+    /// OpenPilot, <http://openpilot.org>
     Openpilot = 4,
     /// Generic autopilot only supporting simple waypoints
     GenericWaypointsOnly = 5,
@@ -78,27 +78,27 @@ pub enum MavAutopilot {
     GenericMissionFull = 7,
     /// No valid autopilot, e.g. a GCS or other MAVLink component
     Invalid = 8,
-    /// PPZ UAV - http://nongnu.org/paparazzi
+    /// PPZ UAV - <http://nongnu.org/paparazzi>
     Ppz = 9,
     /// UAV Dev Board
     Udb = 10,
     /// FlexiPilot
     Fp = 11,
-    /// PX4 Autopilot - http://px4.io/
+    /// PX4 Autopilot - <http://px4.io/>
     Px4 = 12,
-    /// SMACCMPilot - http://smaccmpilot.org
+    /// SMACCMPilot - <http://smaccmpilot.org>
     Smaccmpilot = 13,
-    /// AutoQuad -- http://autoquad.org
+    /// AutoQuad -- <http://autoquad.org>
     Autoquad = 14,
-    /// Armazila -- http://armazila.com
+    /// Armazila -- <http://armazila.com>
     Armazila = 15,
-    /// Aerob -- http://aerob.ru
+    /// Aerob -- <http://aerob.ru>
     Aerob = 16,
-    /// ASLUAV autopilot -- http://www.asl.ethz.ch
+    /// ASLUAV autopilot -- <http://www.asl.ethz.ch>
     Asluav = 17,
-    /// SmartAP Autopilot - http://sky-drones.com
+    /// SmartAP Autopilot - <http://sky-drones.com>
     Smartap = 18,
-    /// AirRails - http://uaventure.com
+    /// AirRails - <http://uaventure.com>
     Airrails = 19,
 }
 #[derive(
@@ -567,7 +567,7 @@ pub enum MavComponent {
 )]
 #[repr(i32)]
 pub enum MavCmd {
-    /// Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries
+    /// Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. See <https://mavlink.io/en/guide/xml_schema.html#MAV_CMD> for information about the structure of the MAV_CMD entries
     /// Not used in MavLink, make protobuf happy.
     Undefined = 0,
     /// Request the target system(s) emit a single instance of a specified message (i.e. a "one-shot" version of MAV_CMD_SET_MESSAGE_INTERVAL).

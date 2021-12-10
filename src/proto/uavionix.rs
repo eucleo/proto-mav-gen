@@ -71,7 +71,7 @@ pub struct UavionixAdsbOutDynamic {
     /// bitfield defined by enum UAVIONIX_ADSB_OUT_DYNAMIC_STATE
     #[prost(uint32, tag = "12")]
     pub state: u32,
-    /// Mode A code (typically 1200 [0x04B0] for VFR)
+    /// Mode A code (typically 1200 \[0x04B0\] for VFR)
     #[prost(uint32, tag = "13")]
     pub squawk: u32,
     /// 0-1: no fix, 2: 2D fix, 3: 3D fix, 4: DGPS, 5: RTK

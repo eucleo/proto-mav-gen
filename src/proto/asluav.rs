@@ -315,22 +315,22 @@ pub struct AslObctrl {
     /// Time since system start
     #[prost(uint64, tag = "1")]
     pub timestamp: u64,
-    /// Elevator command [~]
+    /// Elevator command \[~\]
     #[prost(float, tag = "2")]
     pub u_elev: f32,
-    /// Throttle command [~]
+    /// Throttle command \[~\]
     #[prost(float, tag = "3")]
     pub u_throt: f32,
-    /// Throttle 2 command [~]
+    /// Throttle 2 command \[~\]
     #[prost(float, tag = "4")]
     pub u_throt2: f32,
-    /// Left aileron command [~]
+    /// Left aileron command \[~\]
     #[prost(float, tag = "5")]
     pub u_ail_l: f32,
-    /// Right aileron command [~]
+    /// Right aileron command \[~\]
     #[prost(float, tag = "6")]
     pub u_ail_r: f32,
-    /// Rudder command [~]
+    /// Rudder command \[~\]
     #[prost(float, tag = "7")]
     pub u_rud: f32,
     /// Off-board computer status
@@ -477,10 +477,10 @@ pub struct FwSoaringData {
     /// Debug variable 2
     #[prost(float, tag = "23")]
     pub debug_var2: f32,
-    /// Control Mode [-]
+    /// Control Mode \[-\]
     #[prost(uint32, tag = "24")]
     pub control_mode: u32,
-    /// Data valid [-]
+    /// Data valid \[-\]
     #[prost(uint32, tag = "25")]
     pub valid: u32,
 }
@@ -492,7 +492,7 @@ pub struct SensorpodStatus {
     /// Timestamp in linuxtime (since 1.1.1970)
     #[prost(uint64, tag = "1")]
     pub timestamp: u64,
-    /// Free space available in recordings directory in [Gb] * 1e2
+    /// Free space available in recordings directory in \[Gb\] * 1e2
     #[prost(uint32, tag = "2")]
     pub free_space: u32,
     /// Rate of ROS topic 1
@@ -1178,7 +1178,7 @@ pub enum MavCmd {
     /// MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude
     /// MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude
     /// ***** END Params
-    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamConfigure = 202,
     /// ***** START Params
     /// Modes: P, TV, AV, M, Etc.
@@ -1189,7 +1189,7 @@ pub enum MavCmd {
     /// Command Identity.
     /// Main engine cut-off time before camera trigger. (0 means no cut-off)
     /// ***** END Params
-    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamControl = 203,
     /// ***** START Params
     /// Session control e.g. show/hide lens
@@ -1420,7 +1420,7 @@ pub enum MavCmd {
     /// Reserved (set to 0)
     /// WIP: ID (e.g. camera ID -1 for all IDs)
     /// ***** END Params
-    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: https://mavlink.io/en/services/command.html.
+    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: <https://mavlink.io/en/services/command.html.>
     DoUpgrade = 247,
     /// ***** START Params
     /// Component id of the component to be upgraded. If set to 0, all components should be upgraded.

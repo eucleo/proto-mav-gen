@@ -6,22 +6,22 @@ pub struct NavFilterBias {
     /// Timestamp (microseconds)
     #[prost(uint64, tag = "1")]
     pub usec: u64,
-    /// b_f[0]
+    /// b_f\[0\]
     #[prost(float, tag = "2")]
     pub accel_0: f32,
-    /// b_f[1]
+    /// b_f\[1\]
     #[prost(float, tag = "3")]
     pub accel_1: f32,
-    /// b_f[2]
+    /// b_f\[2\]
     #[prost(float, tag = "4")]
     pub accel_2: f32,
-    /// b_f[0]
+    /// b_f\[0\]
     #[prost(float, tag = "5")]
     pub gyro_0: f32,
-    /// b_f[1]
+    /// b_f\[1\]
     #[prost(float, tag = "6")]
     pub gyro_1: f32,
-    /// b_f[2]
+    /// b_f\[2\]
     #[prost(float, tag = "7")]
     pub gyro_2: f32,
 }

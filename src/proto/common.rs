@@ -1,4 +1,4 @@
-/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at https://mavlink.io/en/services/heartbeat.html
+/// The heartbeat message shows that a system or component is present and responding. The type and autopilot fields (along with the message component id), allow the receiving system to treat further messages from this system appropriately (e.g. by laying out the user interface based on the autopilot). This microservice is documented at <https://mavlink.io/en/services/heartbeat.html>
 ///
 /// MavLink id: 0
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -40,7 +40,7 @@ pub struct SysStatus {
     /// bitfield defined by enum MAV_SYS_STATUS_SENSOR
     #[prost(uint32, tag = "3")]
     pub onboard_control_sensors_health: u32,
-    /// Maximum usage in percent of the mainloop time. Values: [0-1000] - should always be below 1000
+    /// Maximum usage in percent of the mainloop time. Values: \[0-1000\] - should always be below 1000
     #[prost(uint32, tag = "4")]
     pub load: u32,
     /// Battery voltage, UINT16_MAX: Voltage not sent by autopilot
@@ -83,7 +83,7 @@ pub struct SystemTime {
     #[prost(uint32, tag = "2")]
     pub time_boot_ms: u32,
 }
-/// A ping message either requesting or responding to a ping. This allows to measure the system latencies, including serial port, radio modem and UDP connections. The ping microservice is documented at https://mavlink.io/en/services/ping.html
+/// A ping message either requesting or responding to a ping. This allows to measure the system latencies, including serial port, radio modem and UDP connections. The ping microservice is documented at <https://mavlink.io/en/services/ping.html>
 ///
 /// MavLink id: 4
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -197,7 +197,7 @@ pub struct SetMode {
     #[prost(enumeration = "MavMode", tag = "3")]
     pub base_mode: i32,
 }
-/// Request to read the onboard parameter with the param_id string id. Onboard parameters are stored as key[const char*] -> value[float]. This allows to send a parameter to any other component (such as the GCS) without the need of previous knowledge of possible parameter names. Thus the same GCS can store different parameters for different autopilots. See also https://mavlink.io/en/services/parameter.html for a full documentation of QGroundControl and IMU code.
+/// Request to read the onboard parameter with the param_id string id. Onboard parameters are stored as key[const char*] -> value\[float\]. This allows to send a parameter to any other component (such as the GCS) without the need of previous knowledge of possible parameter names. Thus the same GCS can store different parameters for different autopilots. See also <https://mavlink.io/en/services/parameter.html> for a full documentation of QGroundControl and IMU code.
 ///
 /// MavLink id: 20
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -215,7 +215,7 @@ pub struct ParamRequestRead {
     #[prost(string, tag = "4")]
     pub param_id: ::prost::alloc::string::String,
 }
-/// Request all parameters of this component. After this request, all parameters are emitted. The parameter microservice is documented at https://mavlink.io/en/services/parameter.html
+/// Request all parameters of this component. After this request, all parameters are emitted. The parameter microservice is documented at <https://mavlink.io/en/services/parameter.html>
 ///
 /// MavLink id: 21
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -227,7 +227,7 @@ pub struct ParamRequestList {
     #[prost(uint32, tag = "2")]
     pub target_component: u32,
 }
-/// Emit the value of a onboard parameter. The inclusion of param_count and param_index in the message allows the recipient to keep track of received parameters and allows him to re-request missing parameters after a loss or timeout. The parameter microservice is documented at https://mavlink.io/en/services/parameter.html
+/// Emit the value of a onboard parameter. The inclusion of param_count and param_index in the message allows the recipient to keep track of received parameters and allows him to re-request missing parameters after a loss or timeout. The parameter microservice is documented at <https://mavlink.io/en/services/parameter.html>
 ///
 /// MavLink id: 22
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -248,7 +248,7 @@ pub struct ParamValue {
     #[prost(enumeration = "MavParamType", tag = "5")]
     pub param_type: i32,
 }
-/// Set a parameter value (write new value to permanent storage). IMPORTANT: The receiving component should acknowledge the new parameter value by sending a PARAM_VALUE message to all communication partners. This will also ensure that multiple GCS all have an up-to-date list of all parameters. If the sending GCS did not receive a PARAM_VALUE message within its timeout time, it should re-send the PARAM_SET message. The parameter microservice is documented at https://mavlink.io/en/services/parameter.html
+/// Set a parameter value (write new value to permanent storage). IMPORTANT: The receiving component should acknowledge the new parameter value by sending a PARAM_VALUE message to all communication partners. This will also ensure that multiple GCS all have an up-to-date list of all parameters. If the sending GCS did not receive a PARAM_VALUE message within its timeout time, it should re-send the PARAM_SET message. The parameter microservice is documented at <https://mavlink.io/en/services/parameter.html>
 ///
 /// MavLink id: 23
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -594,7 +594,7 @@ pub struct RcChannelsScaled {
     /// Servo output port (set of 8 outputs = 1 port). Flight stacks running on Pixhawk should use: 0 = MAIN, 1 = AUX.
     #[prost(uint32, tag = "10")]
     pub port: u32,
-    /// Receive signal strength indicator in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Receive signal strength indicator in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "11")]
     pub rssi: u32,
 }
@@ -633,7 +633,7 @@ pub struct RcChannelsRaw {
     /// Servo output port (set of 8 outputs = 1 port). Flight stacks running on Pixhawk should use: 0 = MAIN, 1 = AUX.
     #[prost(uint32, tag = "10")]
     pub port: u32,
-    /// Receive signal strength indicator in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Receive signal strength indicator in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "11")]
     pub rssi: u32,
 }
@@ -673,7 +673,7 @@ pub struct ServoOutputRaw {
     #[prost(uint32, tag = "10")]
     pub port: u32,
 }
-/// Request a partial list of mission items from the system/component. https://mavlink.io/en/services/mission.html. If start and end index are the same, just send one waypoint.
+/// Request a partial list of mission items from the system/component. <https://mavlink.io/en/services/mission.html.> If start and end index are the same, just send one waypoint.
 ///
 /// MavLink id: 37
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -710,7 +710,7 @@ pub struct MissionWritePartialList {
     pub target_component: u32,
 }
 /// Message encoding a mission item. This message is emitted to announce
-/// the presence of a mission item and to set a mission item on the system. The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). NaN may be used to indicate an optional/default value (e.g. to use the system's current latitude or yaw rather than a specific value). See also https://mavlink.io/en/services/mission.html.
+/// the presence of a mission item and to set a mission item on the system. The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). NaN may be used to indicate an optional/default value (e.g. to use the system's current latitude or yaw rather than a specific value). See also <https://mavlink.io/en/services/mission.html.>
 ///
 /// MavLink id: 39
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -758,7 +758,7 @@ pub struct MissionItem {
     #[prost(uint32, tag = "14")]
     pub autocontinue: u32,
 }
-/// Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM message. https://mavlink.io/en/services/mission.html
+/// Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM message. <https://mavlink.io/en/services/mission.html>
 ///
 /// MavLink id: 40
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -926,7 +926,7 @@ pub struct ParamMapRc {
     #[prost(uint32, tag = "9")]
     pub parameter_rc_channel_index: u32,
 }
-/// Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM_INT message. https://mavlink.io/en/services/mission.html
+/// Request the information of the mission item with the sequence number seq. The response of the system to this message should be a MISSION_ITEM_INT message. <https://mavlink.io/en/services/mission.html>
 ///
 /// MavLink id: 51
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1219,7 +1219,7 @@ pub struct RcChannels {
     /// Total number of RC channels being received. This can be larger than 18, indicating that more channels are available but not given in this message. This value should be 0 when no RC channels are available.
     #[prost(uint32, tag = "20")]
     pub chancount: u32,
-    /// Receive signal strength indicator in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Receive signal strength indicator in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "21")]
     pub rssi: u32,
 }
@@ -1264,16 +1264,16 @@ pub struct DataStream {
 /// MavLink id: 69
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct ManualControl {
-    /// X-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to forward(1000)-backward(-1000) movement on a joystick and the pitch of a vehicle.
+    /// X-axis, normalized to the range \[-1000,1000\]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to forward(1000)-backward(-1000) movement on a joystick and the pitch of a vehicle.
     #[prost(int32, tag = "1")]
     pub x: i32,
-    /// Y-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to left(-1000)-right(1000) movement on a joystick and the roll of a vehicle.
+    /// Y-axis, normalized to the range \[-1000,1000\]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to left(-1000)-right(1000) movement on a joystick and the roll of a vehicle.
     #[prost(int32, tag = "2")]
     pub y: i32,
-    /// Z-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to a separate slider movement with maximum being 1000 and minimum being -1000 on a joystick and the thrust of a vehicle. Positive values are positive thrust, negative values are negative thrust.
+    /// Z-axis, normalized to the range \[-1000,1000\]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to a separate slider movement with maximum being 1000 and minimum being -1000 on a joystick and the thrust of a vehicle. Positive values are positive thrust, negative values are negative thrust.
     #[prost(int32, tag = "3")]
     pub z: i32,
-    /// R-axis, normalized to the range [-1000,1000]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to a twisting of the joystick, with counter-clockwise being 1000 and clockwise being -1000, and the yaw of a vehicle.
+    /// R-axis, normalized to the range \[-1000,1000\]. A value of INT16_MAX indicates that this axis is invalid. Generally corresponds to a twisting of the joystick, with counter-clockwise being 1000 and clockwise being -1000, and the yaw of a vehicle.
     #[prost(int32, tag = "4")]
     pub r: i32,
     /// A bitfield corresponding to the joystick buttons' current state, 1 for pressed, 0 for released. The lowest bit corresponds to Button 1.
@@ -1320,7 +1320,7 @@ pub struct RcChannelsOverride {
     pub target_component: u32,
 }
 /// Message encoding a mission item. This message is emitted to announce
-/// the presence of a mission item and to set a mission item on the system. The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). NaN or INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current latitude, yaw rather than a specific value). See also https://mavlink.io/en/services/mission.html.
+/// the presence of a mission item and to set a mission item on the system. The mission item can be either in x, y, z meters (type: LOCAL) or x:lat, y:lon, z:altitude. Local frame is Z-down, right handed (NED), global frame is Z-up, right handed (ENU). NaN or INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current latitude, yaw rather than a specific value). See also <https://mavlink.io/en/services/mission.html.>
 ///
 /// MavLink id: 73
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1392,7 +1392,7 @@ pub struct VfrHud {
     #[prost(uint32, tag = "6")]
     pub throttle: u32,
 }
-/// Message encoding a command with parameters as scaled integers. Scaling depends on the actual command value. The command microservice is documented at https://mavlink.io/en/services/command.html
+/// Message encoding a command with parameters as scaled integers. Scaling depends on the actual command value. The command microservice is documented at <https://mavlink.io/en/services/command.html>
 ///
 /// MavLink id: 75
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1437,7 +1437,7 @@ pub struct CommandInt {
     #[prost(uint32, tag = "13")]
     pub autocontinue: u32,
 }
-/// Send a command with up to seven parameters to the MAV. The command microservice is documented at https://mavlink.io/en/services/command.html
+/// Send a command with up to seven parameters to the MAV. The command microservice is documented at <https://mavlink.io/en/services/command.html>
 ///
 /// MavLink id: 76
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1476,7 +1476,7 @@ pub struct CommandLong {
     #[prost(uint32, tag = "11")]
     pub confirmation: u32,
 }
-/// Report status of a command. Includes feedback whether the command was executed. The command microservice is documented at https://mavlink.io/en/services/command.html
+/// Report status of a command. Includes feedback whether the command was executed. The command microservice is documented at <https://mavlink.io/en/services/command.html>
 ///
 /// MavLink id: 77
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1488,7 +1488,7 @@ pub struct CommandAck {
     #[prost(enumeration = "MavResult", tag = "2")]
     pub result: i32,
 }
-/// Cancel a long running command. The target system should respond with a COMMAND_ACK to the original command with result=MAV_RESULT_CANCELLED if the long running process was cancelled. If it has already completed, the cancel action can be ignored. The cancel action can be retried until some sort of acknowledgement to the original command has been received. The command microservice is documented at https://mavlink.io/en/services/command.html
+/// Cancel a long running command. The target system should respond with a COMMAND_ACK to the original command with result=MAV_RESULT_CANCELLED if the long running process was cancelled. If it has already completed, the cancel action can be ignored. The cancel action can be retried until some sort of acknowledgement to the original command has been received. The command microservice is documented at <https://mavlink.io/en/services/command.html>
 ///
 /// MavLink id: 80
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -1962,7 +1962,7 @@ pub struct HilRcInputsRaw {
     /// RC channel 12 value
     #[prost(uint32, tag = "13")]
     pub chan12_raw: u32,
-    /// Receive signal strength indicator in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Receive signal strength indicator in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "14")]
     pub rssi: u32,
 }
@@ -2338,19 +2338,19 @@ pub struct RadioStatus {
     /// Count of error corrected radio packets (since boot).
     #[prost(uint32, tag = "2")]
     pub fixed: u32,
-    /// Local (message sender) recieved signal strength indication in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Local (message sender) recieved signal strength indication in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "3")]
     pub rssi: u32,
-    /// Remote (message receiver) signal strength indication in device-dependent units/scale. Values: [0-254], 255: invalid/unknown.
+    /// Remote (message receiver) signal strength indication in device-dependent units/scale. Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "4")]
     pub remrssi: u32,
     /// Remaining free transmitter buffer space.
     #[prost(uint32, tag = "5")]
     pub txbuf: u32,
-    /// Local background noise level. These are device dependent RSSI values (scale as approx 2x dB on SiK radios). Values: [0-254], 255: invalid/unknown.
+    /// Local background noise level. These are device dependent RSSI values (scale as approx 2x dB on SiK radios). Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "6")]
     pub noise: u32,
-    /// Remote background noise level. These are device dependent RSSI values (scale as approx 2x dB on SiK radios). Values: [0-254], 255: invalid/unknown.
+    /// Remote background noise level. These are device dependent RSSI values (scale as approx 2x dB on SiK radios). Values: \[0-254\], 255: invalid/unknown.
     #[prost(uint32, tag = "7")]
     pub remnoise: u32,
 }
@@ -2903,7 +2903,7 @@ pub struct ScaledImu3 {
     #[prost(int32, tag = "10")]
     pub zmag: i32,
 }
-/// Handshake message to initiate, control and stop image streaming when using the Image Transmission Protocol: https://mavlink.io/en/services/image_transmission.html.
+/// Handshake message to initiate, control and stop image streaming when using the Image Transmission Protocol: <https://mavlink.io/en/services/image_transmission.html.>
 ///
 /// MavLink id: 130
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -2926,11 +2926,11 @@ pub struct DataTransmissionHandshake {
     /// Payload size per packet (normally 253 byte, see DATA field size in message ENCAPSULATED_DATA) (set on ACK only).
     #[prost(uint32, tag = "6")]
     pub payload: u32,
-    /// JPEG quality. Values: [1-100].
+    /// JPEG quality. Values: \[1-100\].
     #[prost(uint32, tag = "7")]
     pub jpg_quality: u32,
 }
-/// Data packet for images sent using the Image Transmission Protocol: https://mavlink.io/en/services/image_transmission.html.
+/// Data packet for images sent using the Image Transmission Protocol: <https://mavlink.io/en/services/image_transmission.html.>
 ///
 /// MavLink id: 131
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -3316,7 +3316,7 @@ pub struct BatteryStatus {
     /// Type (chemistry) of the battery
     #[prost(enumeration = "MavBatteryType", tag = "8")]
     pub r#type: i32,
-    /// Remaining battery energy. Values: [0-100], -1: autopilot does not estimate the remaining battery.
+    /// Remaining battery energy. Values: \[0-100\], -1: autopilot does not estimate the remaining battery.
     #[prost(int32, tag = "9")]
     pub battery_remaining: i32,
 }
@@ -3360,7 +3360,7 @@ pub struct AutopilotVersion {
     #[prost(uint32, repeated, packed = "false", tag = "11")]
     pub os_custom_version: ::prost::alloc::vec::Vec<u32>,
 }
-/// The location of a landing target. See: https://mavlink.io/en/services/landing_target.html
+/// The location of a landing target. See: <https://mavlink.io/en/services/landing_target.html>
 ///
 /// MavLink id: 149
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -3925,7 +3925,7 @@ pub struct Collision {
 /// MavLink id: 248
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
 pub struct V2Extension {
-    /// A code that identifies the software component that understands this message (analogous to USB device classes or mime type strings). If this code is less than 32768, it is considered a 'registered' protocol extension and the corresponding entry should be added to https://github.com/mavlink/mavlink/definition_files/extension_message_ids.xml. Software creators can register blocks of message IDs as needed (useful for GCS specific metadata, etc...). Message_types greater than 32767 are considered local experiments and should not be checked in to any widely distributed codebase.
+    /// A code that identifies the software component that understands this message (analogous to USB device classes or mime type strings). If this code is less than 32768, it is considered a 'registered' protocol extension and the corresponding entry should be added to <https://github.com/mavlink/mavlink/definition_files/extension_message_ids.xml.> Software creators can register blocks of message IDs as needed (useful for GCS specific metadata, etc...). Message_types greater than 32767 are considered local experiments and should not be checked in to any widely distributed codebase.
     #[prost(uint32, tag = "1")]
     pub message_type: u32,
     /// Network ID (0 for broadcast)
@@ -4235,7 +4235,7 @@ pub struct CameraImageCaptured {
     /// Boolean indicating success (1) or failure (0) while capturing this image.
     #[prost(int32, tag = "10")]
     pub capture_result: i32,
-    /// URL of image taken. Either local storage or http://foo.jpg if camera provides an HTTP interface.
+    /// URL of image taken. Either local storage or <http://foo.jpg> if camera provides an HTTP interface.
     #[prost(string, tag = "11")]
     pub file_url: ::prost::alloc::string::String,
 }
@@ -4761,7 +4761,7 @@ pub struct AisVessel {
     #[prost(string, tag = "17")]
     pub name: ::prost::alloc::string::String,
 }
-/// General status information of an UAVCAN node. Please refer to the definition of the UAVCAN message "uavcan.protocol.NodeStatus" for the background information. The UAVCAN specification is available at http://uavcan.org.
+/// General status information of an UAVCAN node. Please refer to the definition of the UAVCAN message "uavcan.protocol.NodeStatus" for the background information. The UAVCAN specification is available at <http://uavcan.org.>
 ///
 /// MavLink id: 310
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -4785,7 +4785,7 @@ pub struct UavcanNodeStatus {
     #[prost(uint32, tag = "6")]
     pub sub_mode: u32,
 }
-/// General information describing a particular UAVCAN node. Please refer to the definition of the UAVCAN service "uavcan.protocol.GetNodeInfo" for the background information. This message should be emitted by the system whenever a new node appears online, or an existing node reboots. Additionally, it can be emitted upon request from the other end of the MAVLink channel (see MAV_CMD_UAVCAN_GET_NODE_INFO). It is also not prohibited to emit this message unconditionally at a low frequency. The UAVCAN specification is available at http://uavcan.org.
+/// General information describing a particular UAVCAN node. Please refer to the definition of the UAVCAN service "uavcan.protocol.GetNodeInfo" for the background information. This message should be emitted by the system whenever a new node appears online, or an existing node reboots. Additionally, it can be emitted upon request from the other end of the MAVLink channel (see MAV_CMD_UAVCAN_GET_NODE_INFO). It is also not prohibited to emit this message unconditionally at a low frequency. The UAVCAN specification is available at <http://uavcan.org.>
 ///
 /// MavLink id: 311
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -4932,7 +4932,7 @@ pub struct ObstacleDistance {
     #[prost(uint32, tag = "6")]
     pub increment: u32,
 }
-/// Odometry message to communicate odometry information with an external interface. Fits ROS REP 147 standard for aerial vehicles (http://www.ros.org/reps/rep-0147.html).
+/// Odometry message to communicate odometry information with an external interface. Fits ROS REP 147 standard for aerial vehicles (<http://www.ros.org/reps/rep-0147.html>).
 ///
 /// MavLink id: 331
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -5302,7 +5302,7 @@ pub struct SmartBatteryStatus {
     /// Battery ID
     #[prost(uint32, tag = "3")]
     pub id: u32,
-    /// Remaining battery energy. Values: [0-100], -1: field not provided.
+    /// Remaining battery energy. Values: \[0-100\], -1: field not provided.
     #[prost(int32, tag = "4")]
     pub capacity_remaining: i32,
     /// Battery current (through all cells/loads). Positive if discharging, negative if charging. UINT16_MAX: field not provided.
@@ -5492,7 +5492,7 @@ pub struct ComponentInformation {
     /// Unique uid for the translation file associated with the metadata.
     #[prost(uint32, tag = "4")]
     pub translation_uid: u32,
-    /// Component definition URI. If prefix mavlinkftp:// file is downloaded from vehicle over mavlink ftp protocol. If prefix http[s]:// file is downloaded over internet. Files are json format. They can end in .gz to indicate file is in gzip format.
+    /// Component definition URI. If prefix mavlinkftp:// file is downloaded from vehicle over mavlink ftp protocol. If prefix http\[s\]:// file is downloaded over internet. Files are json format. They can end in .gz to indicate file is in gzip format.
     #[prost(string, tag = "5")]
     pub metadata_uri: ::prost::alloc::string::String,
     /// The translations for strings within the metadata file. If null the either do not exist or may be included in the metadata file itself. The translations specified here supercede any which may be in the metadata file itself. The uri format is the same as component_metadata_uri . Files are in Json Translation spec format. Empty string indicates no tranlsation file.
@@ -5549,7 +5549,7 @@ pub struct WheelDistance {
     #[prost(uint32, tag = "3")]
     pub count: u32,
 }
-/// Data for filling the OpenDroneID Basic ID message. This and the below messages are primarily meant for feeding data to/from an OpenDroneID implementation. E.g. https://github.com/opendroneid/opendroneid-core-c. These messages are compatible with the ASTM Remote ID standard at https://www.astm.org/Standards/F3411.htm and the ASD-STAN Direct Remote ID standard. The usage of these messages is documented at https://mavlink.io/en/services/opendroneid.html.
+/// Data for filling the OpenDroneID Basic ID message. This and the below messages are primarily meant for feeding data to/from an OpenDroneID implementation. E.g. <https://github.com/opendroneid/opendroneid-core-c.> These messages are compatible with the ASTM Remote ID standard at <https://www.astm.org/Standards/F3411.htm> and the ASD-STAN Direct Remote ID standard. The usage of these messages is documented at <https://mavlink.io/en/services/opendroneid.html.>
 ///
 /// MavLink id: 12900
 #[derive(serde::Serialize, serde::Deserialize, Clone, PartialEq, ::prost::Message)]
@@ -5560,7 +5560,7 @@ pub struct OpenDroneIdBasicId {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "2")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "3")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Indicates the format for the uas_id field of this message.
@@ -5611,7 +5611,7 @@ pub struct OpenDroneIdLocation {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "11")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "12")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Indicates whether the unmanned aircraft is on the ground or in the air.
@@ -5650,7 +5650,7 @@ pub struct OpenDroneIdAuthentication {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "3")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "4")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Indicates the type of authentication.
@@ -5680,7 +5680,7 @@ pub struct OpenDroneIdSelfId {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "2")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "3")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Indicates the type of the description field.
@@ -5719,7 +5719,7 @@ pub struct OpenDroneIdSystem {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "8")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "9")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Specifies the operator location type.
@@ -5746,7 +5746,7 @@ pub struct OpenDroneIdOperatorId {
     /// Component ID (0 for broadcast).
     #[prost(uint32, tag = "2")]
     pub target_component: u32,
-    /// Only used for drone ID data received from other UAs. See detailed description at https://mavlink.io/en/services/opendroneid.html.
+    /// Only used for drone ID data received from other UAs. See detailed description at <https://mavlink.io/en/services/opendroneid.html.>
     #[prost(uint32, repeated, packed = "false", tag = "3")]
     pub id_or_mac: ::prost::alloc::vec::Vec<u32>,
     /// Indicates the type of the operator_id field.
@@ -5797,11 +5797,11 @@ pub enum MavAutopilot {
     Generic = 0,
     /// Reserved for future use.
     Reserved = 1,
-    /// SLUGS autopilot, http://slugsuav.soe.ucsc.edu
+    /// SLUGS autopilot, <http://slugsuav.soe.ucsc.edu>
     Slugs = 2,
-    /// ArduPilot - Plane/Copter/Rover/Sub/Tracker, https://ardupilot.org
+    /// ArduPilot - Plane/Copter/Rover/Sub/Tracker, <https://ardupilot.org>
     Ardupilotmega = 3,
-    /// OpenPilot, http://openpilot.org
+    /// OpenPilot, <http://openpilot.org>
     Openpilot = 4,
     /// Generic autopilot only supporting simple waypoints
     GenericWaypointsOnly = 5,
@@ -5811,27 +5811,27 @@ pub enum MavAutopilot {
     GenericMissionFull = 7,
     /// No valid autopilot, e.g. a GCS or other MAVLink component
     Invalid = 8,
-    /// PPZ UAV - http://nongnu.org/paparazzi
+    /// PPZ UAV - <http://nongnu.org/paparazzi>
     Ppz = 9,
     /// UAV Dev Board
     Udb = 10,
     /// FlexiPilot
     Fp = 11,
-    /// PX4 Autopilot - http://px4.io/
+    /// PX4 Autopilot - <http://px4.io/>
     Px4 = 12,
-    /// SMACCMPilot - http://smaccmpilot.org
+    /// SMACCMPilot - <http://smaccmpilot.org>
     Smaccmpilot = 13,
-    /// AutoQuad -- http://autoquad.org
+    /// AutoQuad -- <http://autoquad.org>
     Autoquad = 14,
-    /// Armazila -- http://armazila.com
+    /// Armazila -- <http://armazila.com>
     Armazila = 15,
-    /// Aerob -- http://aerob.ru
+    /// Aerob -- <http://aerob.ru>
     Aerob = 16,
-    /// ASLUAV autopilot -- http://www.asl.ethz.ch
+    /// ASLUAV autopilot -- <http://www.asl.ethz.ch>
     Asluav = 17,
-    /// SmartAP Autopilot - http://sky-drones.com
+    /// SmartAP Autopilot - <http://sky-drones.com>
     Smartap = 18,
-    /// AirRails - http://uaventure.com
+    /// AirRails - <http://uaventure.com>
     Airrails = 19,
 }
 #[derive(
@@ -5918,7 +5918,7 @@ pub enum MavType {
     Flarm = 32,
     /// Servo
     Servo = 33,
-    /// Open Drone ID. See https://mavlink.io/en/services/opendroneid.html.
+    /// Open Drone ID. See <https://mavlink.io/en/services/opendroneid.html.>
     Odid = 34,
 }
 #[derive(
@@ -7240,7 +7240,7 @@ pub enum CompMetadataType {
 )]
 #[repr(i32)]
 pub enum MavCmd {
-    /// Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See https://mavlink.io/en/guide/xml_schema.html#MAV_CMD for information about the structure of the MAV_CMD entries
+    /// Commands to be executed by the MAV. They can be executed on user request, or as part of a mission script. If the action is used in a mission, the parameter mapping to the waypoint/mission message is as follows: Param 1, Param 2, Param 3, Param 4, X: Param 5, Y:Param 6, Z:Param 7. This command list is similar what ARINC 424 is for commercial aircraft: A data format how to interpret waypoint/mission data. NaN and INT32_MAX may be used in float/integer params (respectively) to indicate optional/default values (e.g. to use the component's current yaw or latitude rather than a specific value). See <https://mavlink.io/en/guide/xml_schema.html#MAV_CMD> for information about the structure of the MAV_CMD entries
     /// Not used in MavLink, make protobuf happy.
     Undefined = 0,
     /// Navigate to waypoint.
@@ -7821,7 +7821,7 @@ pub enum MavCmd {
     /// MAV_ROI_WPNEXT: roll offset from next waypoint, MAV_ROI_LOCATION: longitude
     /// MAV_ROI_WPNEXT: yaw offset from next waypoint, MAV_ROI_LOCATION: altitude
     /// ***** END Params
-    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Configure digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamConfigure = 202,
     /// ***** START Params
     /// Modes: P, TV, AV, M, Etc.
@@ -7832,7 +7832,7 @@ pub enum MavCmd {
     /// Command Identity.
     /// Main engine cut-off time before camera trigger. (0 means no cut-off)
     /// ***** END Params
-    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see https://mavlink.io/en/services/camera_def.html ).
+    /// Control digital camera. This is a fallback message for systems that have not yet implemented PARAM_EXT_XXX messages and camera definition files (see <https://mavlink.io/en/services/camera_def.html> ).
     DoDigicamControl = 203,
     /// ***** START Params
     /// Session control e.g. show/hide lens
@@ -8063,7 +8063,7 @@ pub enum MavCmd {
     /// Reserved (set to 0)
     /// WIP: ID (e.g. camera ID -1 for all IDs)
     /// ***** END Params
-    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: https://mavlink.io/en/services/command.html.
+    /// Request a target system to start an upgrade of one (or all) of its components. For example, the command might be sent to a companion computer to cause it to upgrade a connected flight controller. The system doing the upgrade will report progress using the normal command protocol sequence for a long running operation. Command protocol information: <https://mavlink.io/en/services/command.html.>
     DoUpgrade = 247,
     /// ***** START Params
     /// Component id of the component to be upgraded. If set to 0, all components should be upgraded.
@@ -8959,7 +8959,7 @@ pub enum MavMissionResult {
 )]
 #[repr(i32)]
 pub enum MavSeverity {
-    /// Indicates the severity level, generally used for status messages to indicate their relative urgency. Based on RFC-5424 using expanded definitions at: http://www.kiwisyslog.com/kb/info:-syslog-message-levels/.
+    /// Indicates the severity level, generally used for status messages to indicate their relative urgency. Based on RFC-5424 using expanded definitions at: <http://www.kiwisyslog.com/kb/info:-syslog-message-levels/.>
     /// System is unusable. This is a "panic" condition.
     Emergency = 0,
     /// Action should be taken immediately. Indicates error in non-critical systems.
@@ -11058,10 +11058,10 @@ pub enum TuneFormat {
     /// This enum is used to define bitmasks (work around protobuf limitations).
     /// Not used in MavLink, make protobuf happy.
     Undefined = 0,
-    /// Format is QBasic 1.1 Play: https://www.qbasic.net/en/reference/qb11/Statement/PLAY-006.htm.
+    /// Format is QBasic 1.1 Play: <https://www.qbasic.net/en/reference/qb11/Statement/PLAY-006.htm.>
     /// bit 1
     Qbasic11 = 1,
-    /// Format is Modern Music Markup Language (MML): https://en.wikipedia.org/wiki/Music_Macro_Language#Modern_MML.
+    /// Format is Modern Music Markup Language (MML): <https://en.wikipedia.org/wiki/Music_Macro_Language#Modern_MML.>
     /// bit 2
     MmlModern = 2,
 }
@@ -11106,7 +11106,7 @@ pub enum ComponentCapFlags {
 )]
 #[repr(i32)]
 pub enum AisType {
-    /// Type of AIS vessel, enum duplicated from AIS standard, https://gpsd.gitlab.io/gpsd/AIVDM.html
+    /// Type of AIS vessel, enum duplicated from AIS standard, <https://gpsd.gitlab.io/gpsd/AIVDM.html>
     /// Not available (default).
     Unknown = 0,
     Reserved1 = 1,
@@ -11231,7 +11231,7 @@ pub enum AisType {
 )]
 #[repr(i32)]
 pub enum AisNavStatus {
-    /// Navigational status of AIS vessel, enum duplicated from AIS standard, https://gpsd.gitlab.io/gpsd/AIVDM.html
+    /// Navigational status of AIS vessel, enum duplicated from AIS standard, <https://gpsd.gitlab.io/gpsd/AIVDM.html>
     /// Under way using engine.
     UnderWay = 0,
     AisNavAnchored = 1,
